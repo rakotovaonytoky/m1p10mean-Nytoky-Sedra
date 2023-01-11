@@ -2,3 +2,4 @@
 backend/node_modules/**/**
 
 frontGarageNS/.vscode/extensions.json
+.vscode/settings.json
