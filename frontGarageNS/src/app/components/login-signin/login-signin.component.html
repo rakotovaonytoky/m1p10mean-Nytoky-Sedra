@@ -4,17 +4,30 @@
     <div class="form sign-in">
         <form [formGroup]="userLogin" (ngSubmit)="login()">
         <h2>Bienvenue,</h2>
-        <label>
-            <span>Email</span>
-            <input type="email" formControlName="email" />
-        </label>
-        <label>
-            <span>Mot de passe</span>
-            <input type="password" formControlName="motDePasse" [minlength]="8"/>
-        </label>
-       
+        <div class="input-group-sm">
+        <label class="labels">Email</label>
+            <input type="email" class="form-control form-control-sm" formControlName="email"
+            [ngClass]="{ 'is-invalid': (submittedLogin && l['email'].errors) || (l['email'].touched && l['email'].errors) }" 
+            />
+            <div *ngIf="(submittedLogin && l['email'].errors) || (l['email']?.touched && l['email'].errors)" class="invalid-feedback">
+                    <div *ngIf="l['email'].errors['required']">
+                    Veuillez préciser votre email.
+                    </div>
+            </div>
+        </div>
+        <label>Mot de passe</label>
+            <div class="input-group-sm">
+            <input type="password" formControlName="motDePasse" class="form-control form-control-sm"
+              [ngClass]="{ 'is-invalid': (submittedLogin && l['motDePasse'].errors) || (l['motDePasse'].touched && l['motDePasse'].errors) }"  />
+            <div *ngIf="(submittedLogin && l['motDePasse'].errors) || (l['motDePasse']?.touched && l['motDePasse'].errors)" class="invalid-feedback">
+                <div *ngIf="l['motDePasse'].errors['required']">
+                    Veuillez entrer votre mot de passe.
+                </div>
+            </div>
+            </div>
         <button type="submit" class="submit"  [disabled]="isLoginLoading"  >
-            <i class="fa"[ngClass]="{'fa-spin fa-spinner': isLoginLoading, 'fa-check': !isLoginLoading}"></i> &nbsp;{{button}}</button>
+            <i class="fa"[ngClass]="{'fa-spin fa-spinner': isLoginLoading, 'fa-check': !isLoginLoading}"></i> &nbsp;{{button}}
+        </button>
     </form>
     </div>
     <div class="sub-cont">
@@ -33,11 +46,14 @@
             </div>
         </div>
         <div class="form sign-up">
+            <form [formGroup]="userLogin" (ngSubmit)="register()">
             <h2>Il est temps de réparer votre voiture,</h2>
-            <label>
-                <span>Nom</span>
-                <input type="text" />
-            </label>
+            <div class="input-group-sm">
+                <label>
+                    <span>Nom</span>
+                    <input type="text" />
+                </label>
+            </div>
             <label>
                 <span>Email</span>
                 <input type="email" />
@@ -50,8 +66,11 @@
                 <span>Confirmer</span>
                 <input type="password" />
             </label>
-            <button type="button" class="submit">Créer</button>
-            
+            <button type="submit" class="submit"  [disabled]="isLoginLoading" >
+                <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoginLoading, 'fa-check': !isLoginLoading}"></i>
+                &nbsp;{{buttonRegister}}
+            </button>
+            </form>
         </div>
     </div>
 </div>

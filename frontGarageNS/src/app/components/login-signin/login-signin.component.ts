@@ -1,3 +1,4 @@
+import { LoginService } from './../../service/login/login.service';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/classes/custom-validator';
@@ -9,10 +10,16 @@ import { CustomValidators } from 'src/app/classes/custom-validator';
 })
 export class LoginSigninComponent implements OnInit {
 
-  constructor(private elRef: ElementRef) { }
+  constructor(
+    loginService: LoginService,
+    public elRef: ElementRef) {
+
+  }
   sign_in_btn: any;
   cont: any;
   button = 'Se connecter';
+  buttonRegister = 'Créer';
+  submittedLogin = false;
   isLoginLoading = false;
   userRegister = new FormGroup({
     nom: new FormControl('', Validators.required),
@@ -42,17 +49,50 @@ export class LoginSigninComponent implements OnInit {
   }
 
   register() {
+    this.isLoginLoading = true;
+    this.buttonRegister = 'Chargement';
 
+    setTimeout(() => {
+      this.isLoginLoading = false;
+      this.buttonRegister = 'Créer';
+      alert('Done loading');
+    }, 8000)
   }
   login() {
     this.isLoginLoading = true;
     this.button = 'Chargement';
+    this.submittedLogin = true;
+
+    if (this.userLogin.invalid) {
+      this.isLoginLoading = false;
+      this.button = 'Se connecter';
+      this.submittedLogin = false;
+      return;
+    }
 
     setTimeout(() => {
       this.isLoginLoading = false;
       this.button = 'Se connecter';
       alert('Done loading');
-    }, 8000)
+    }, 2000)
+
+    // this.loginservice.loginUser(this.userLogin.get('email'), this.userLogin.get('motDePasse'))
+    //   .subscribe({
+    //   next: (data: any) => {
+
+    //   }, error: (err: any) => {
+
+    //   }, complete: () => {
+
+    //   }
+    // })
+  }
+
+  get r() {
+    return this.userRegister.controls;
+  }
+  get l() {
+    return this.userLogin.controls;
   }
 
 

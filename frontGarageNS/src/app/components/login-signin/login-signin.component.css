@@ -7,7 +7,8 @@
 }
 
 .container{
-    margin:5rem 0 0 0;
+    margin:5rem auto auto auto;
+    overflow: hidden;
 }
 
 input,
@@ -231,7 +232,11 @@ input {
     background: #d4af7a;
     text-transform: uppercase;
 }
-
+.submit:disabled{
+    background-color: dimgrey;
+    opacity: 1;
+    cursor: default;
+}
 .fb-btn {
     border: 2px solid #d3dae9;
     color: #8fa1c7;
@@ -275,4 +280,8 @@ input {
 .icon-link--twitter {
     left: auto;
     right: 5px;
+}
+.input-group-sm{
+    max-width: 280px !important;
+        margin: 0 auto !important;
 }
