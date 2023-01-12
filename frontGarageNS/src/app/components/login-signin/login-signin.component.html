@@ -2,18 +2,20 @@
 <div class="container">
 <div class="cont">
     <div class="form sign-in">
+        <form [formGroup]="userLogin" (ngSubmit)="login()">
         <h2>Bienvenue,</h2>
         <label>
             <span>Email</span>
-            <input type="email" />
+            <input type="email" formControlName="email" />
         </label>
         <label>
             <span>Mot de passe</span>
-            <input type="password" />
+            <input type="password" formControlName="motDePasse" [minlength]="8"/>
         </label>
        
-        <button type="button" class="submit">Se connecter</button>
-       
+        <button type="submit" class="submit"  [disabled]="isLoginLoading"  >
+            <i class="fa"[ngClass]="{'fa-spin fa-spinner': isLoginLoading, 'fa-check': !isLoginLoading}"></i> &nbsp;{{button}}</button>
+    </form>
     </div>
     <div class="sub-cont">
         <div class="img">
@@ -25,7 +27,7 @@
                 <h2>Vous avez déjà un compte?</h2>
                 <p>Si vous avez déjà un compte, il vous suffit de vous connecter.</p>
             </div>
-            <div class="img__btn" (click)="sigupClick()">
+            <div class="img__btn" (click)="sigupClickSwitch()">
                 <span class="m--up">Créez un compte</span>
                 <span class="m--in">Connectez-vous</span>
             </div>
