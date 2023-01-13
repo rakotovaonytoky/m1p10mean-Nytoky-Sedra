@@ -8,6 +8,8 @@ import { LoginSigninComponent } from './components/login-signin/login-signin.com
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
+import { TemplateComponent } from './pages/template/template.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { HeaderComponent } from './components/header/header.component';
     LoginSigninComponent,
     ErrorpageComponent,
     HeaderComponent,
+    TemplateComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
