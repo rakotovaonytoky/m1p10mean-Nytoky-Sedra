@@ -27,11 +27,7 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>Type de vehicule</mat-label>
                                 <mat-select formControlName="vType" >
-                                    <mat-option value="one">Légère</mat-option>
-                                    <mat-option value="two">4x4</mat-option>
-                                    <mat-option value="two">SUV</mat-option>
-                                    <mat-option value="two">Camionette</mat-option>
-                                    <mat-option value="two">Camion</mat-option>
+                                    <mat-option *ngFor="let type of typeCars$| async" value="{{type.idType}}">{{type.value}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                           </div>
@@ -51,15 +47,14 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>Marque</mat-label>
                                 <mat-select formControlName="brand">
-                                    <mat-option value="one">TOYOTA</mat-option>
-                                    <mat-option value="one">MAZDA</mat-option>
-                                    <mat-option value="one">WOLKSWAGEN</mat-option>
+                                    <mat-option *ngFor="let model of modelCars$| async" value="{{model.idType}}">{{model.value}}</mat-option>
+                                    
                                    
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field appearance="outline">
                                 <mat-label>Modèle</mat-label>
-                                <input matInput formControlName="model" placeholder="GOLF 6" required>
+                                <input matInput formControlName="model" placeholder="GOLF 6" >
                             </mat-form-field>
                             <div class="form-valid-btn">
                                 <button mat-button matStepperPrevious>Précédent</button>
@@ -67,7 +62,7 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [stepControl]="secondFormGroup" label="Matricule et autres">
+                    <mat-step [stepControl]="thridForm" label="Matricule et autres">
                         <form class="form-container" [formGroup]="thridForm">
                             
                             <mat-form-field appearance="outline">
@@ -93,7 +88,7 @@
                         <p>Cliquez sur enregister pour ajouter.</p>
                         <div class="form-valid-btn">
                             <button mat-button matStepperPrevious>Précédent</button>
-                            <button mat-raised-button color="primary" >Enregistrer</button>
+                            <button mat-raised-button color="primary" (click)="AddCar()" >Enregistrer</button>
                         </div>
                     </mat-step>
                 </mat-stepper>
@@ -102,6 +97,10 @@
                 <img src="" alt="" >
             </div>
             </mat-accordion>
+    </div>
+    <div class="your-cars">
+        <h2 class="h2 text-center">Vos voitures</h2>
+        
     </div>
 </div>
 
