@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="button">
+        <button (click)="panel1.toggle()" mat-raised-button color="primary">Ajouter une voiture</button>
+    </div>
+    <div class="add-accordion">
+            <mat-accordion class="prevent-click">
+                <mat-expansion-panel #panel1 [hideToggle]="false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                        <mat-icon>add_circle</mat-icon>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                           Cliquez ici pour ajouter une voiture
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <!-- form and stepper -->
+                <button mat-raised-button (click)="isLinear" id="toggle-linear">
+                   
+                </button>
+                <mat-stepper [linear]="isLinear" #stepper>
+                    <mat-step [stepControl]="firstFormGroup">
+                        <form class="form-container first" [formGroup]="firstFormGroup">
+                            <ng-template matStepLabel>Choississez le type</ng-template>
+
+                          <div class="form-input-style">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Type de vehicule</mat-label>
+                                <mat-select formControlName="vType" >
+                                    <mat-option value="one">Légère</mat-option>
+                                    <mat-option value="two">4x4</mat-option>
+                                    <mat-option value="two">SUV</mat-option>
+                                    <mat-option value="two">Camionette</mat-option>
+                                    <mat-option value="two">Camion</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                          </div>
+                            <div class="form-input-style">
+                                <label for="exampleColorInput" class="form-label">Couleur de la voiture</label>
+                                <input type="color" class="form-control form-control-color" formControlName="vColor" id="exampleColorInput" value="#563d7c"
+                                    title="Choose your color">
+                            </div>
+                            <div style="display:block">
+                                <br>
+                                <button  mat-raised-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" label="Marque et modele">
+                        <form class="form-container" [formGroup]="secondFormGroup">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Marque</mat-label>
+                                <mat-select formControlName="brand">
+                                    <mat-option value="one">TOYOTA</mat-option>
+                                    <mat-option value="one">MAZDA</mat-option>
+                                    <mat-option value="one">WOLKSWAGEN</mat-option>
+                                   
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Modèle</mat-label>
+                                <input matInput formControlName="model" placeholder="GOLF 6" required>
+                            </mat-form-field>
+                            <div class="form-valid-btn">
+                                <button mat-button matStepperPrevious>Précédent</button>
+                                <button  mat-raised-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" label="Matricule et autres">
+                        <form class="form-container" [formGroup]="thridForm">
+                            
+                            <mat-form-field appearance="outline">
+                                <mat-label>Matricule</mat-label>
+                                <input matInput formControlName="licensePlate" placeholder="4426 TBN" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Propriétaire</mat-label>
+                                <input matInput formControlName="owner" placeholder="RABE" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Année de sortie</mat-label>
+                                <input matInput formControlName="year" placeholder="2010" required>
+                            </mat-form-field>
+                            <div class="form-valid-btn">
+                                <button mat-button matStepperPrevious>Précédent</button>
+                                <button  mat-raised-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step>
+                        <ng-template matStepLabel>Fin</ng-template>
+                        <p>Cliquez sur enregister pour ajouter.</p>
+                        <div class="form-valid-btn">
+                            <button mat-button matStepperPrevious>Précédent</button>
+                            <button mat-raised-button color="primary" >Enregistrer</button>
+                        </div>
+                    </mat-step>
+                </mat-stepper>
+                </mat-expansion-panel>
+            <div class="car-preview">
+                <img src="" alt="" >
+            </div>
+            </mat-accordion>
+    </div>
+</div>
+
+

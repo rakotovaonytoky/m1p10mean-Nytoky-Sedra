@@ -1,5 +1,88 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    /* background: #ededed; */
+:root {
+    --bs-blue: #0d6efd;
+    --bs-indigo: #6610f2;
+    --bs-purple: #6f42c1;
+    --bs-pink: #d63384;
+    --bs-red: #dc3545;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #ffc107;
+    --bs-green: #198754;
+    --bs-teal: #20c997;
+    --bs-cyan: #0dcaf0;
+    --bs-white: #fff;
+    --bs-gray: #6c757d;
+    --bs-gray-dark: #343a40;
+    --bs-primary: #0d6efd;
+    --bs-secondary: #6c757d;
+    --bs-success: #198754;
+    --bs-info: #0dcaf0;
+    --bs-warning: #ffc107;
+    --bs-danger: #dc3545;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-button,
+.mat-stroked-button,
+.mat-flat-button,
+.mat-raised-button,
+.mat-fab {
+    border-radius: 15px !important;
+}
+
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
+    color: #155724;
+}
+
+.mat-button.mat-success:hover,
+.mat-stroked-button.mat-success:hover {
+    background-color: #f0fff3;
+}
+
+.mat-raised-button.mat-success,
+.mat-flat-button.mat-success,
+.mat-fab.mat-success,
+.mat-mini-fab.mat-success {
+    color: #f0fff3;
+    background-color: #155724;
+}
+
+.mat-icon-button.mat-success {
+    color: #155724;
+}
+
+.mat-button.mat-primary,
+.mat-stroked-button.mat-primary {
+    background-color: --bs-primary;
+}
+
+.mat-button.mat-primary:hover,
+.mat-stroked-button.mat-primary:hover {
+    background-color: #f0fff3 !important;
+}
+
+.mat-raised-button.mat-primary,
+.mat-flat-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+    color: #ffff;
+    background-color: --bs-primary !important;
+}
+
+.mat-icon-button.mat-primary {
+    color: --bs-primary;
+}
+
+
+.form-valid-btn > button{
+    margin:0 10px;
 }

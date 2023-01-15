@@ -1,0 +1,19 @@
+.add-accordion{
+    margin: 15px 0 0 0;
+}
+.toggle-panel{
+    border-radius: 0px !important;
+}
+.form-container mat-form-field {
+    margin: 0 12px;
+}
+.first > *{
+    display: inline-block;
+     margin: 0 12px;
+}
+.form-input-style{
+    max-width: 300px;
+}
+mat-form-field{
+min-width: 300px;
+}
