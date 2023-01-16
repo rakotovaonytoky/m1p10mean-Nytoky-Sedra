@@ -1,1 +1,35 @@
-<p>car-card works!</p>
+
+<div class="table-responsive">
+    <table class="table project-list-table table-nowrap align-middle table-borderless shadow-sm p-3 mb-5 bg-body rounded">
+        <tbody>
+            <tr>
+                <td> <span class="badge-soft-primary ">{{brand}}</span>
+                   </td>
+                <td>
+                        <app-car-type-color [type]="vType" [color]="vColor"></app-car-type-color>
+                        <a href="#" class="text-body"></a></td>
+                    <td class="fw-bold"> {{licensePlate}}</td>
+                        <td>
+                            <!-- <span class="badge badge-soft-success mb-0">Deposé</span> -->
+                        <button  mat-raised-button color="primary">Déposer</button>
+                        </td>
+                <td>
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <a href="javascript:void(0);" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Edit" class="px-2 text-primary"><i
+                                    class="bx bx-pencil font-size-18"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="javascript:void(0);" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Delete" class="px-2 text-danger"><i
+                                    class="bx bx-trash-alt font-size-18"></i></a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+           
+              

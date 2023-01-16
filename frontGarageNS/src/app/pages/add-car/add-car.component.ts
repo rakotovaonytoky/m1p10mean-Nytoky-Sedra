@@ -19,6 +19,7 @@ export class AddCarComponent implements OnInit {
   ToInsert!: Car;
   typeCars$!: Observable<Typevalue[]>;
   modelCars$!: Observable<Typevalue[]>;
+  car!: Car;
 
   firstFormGroup = this._formBuilder.group({
     vType: ['', Validators.required],
@@ -42,6 +43,8 @@ export class AddCarComponent implements OnInit {
   ngOnInit(): void {
     this.getCarType();
     this.getCarModel();
+    // this.car.brand = "mercedes";
+    // this.car.licensePlate = "4444 TBN";
 
   }
 

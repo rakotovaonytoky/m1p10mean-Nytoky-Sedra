@@ -19,6 +19,7 @@ import { CarRepairProgressionComponent } from './pages/car-repair-progression/ca
 import { CarInvoiceComponent } from './pages/car-invoice/car-invoice.component';
 import { CarInvoiceDetailsComponent } from './pages/car-invoice-details/car-invoice-details.component';
 import { HomeComponent } from './pages/home/home.component';
+import { CarTypeColorComponent } from './components/car-type-color/car-type-color.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { HomeComponent } from './pages/home/home.component';
     CarInvoiceComponent,
     CarInvoiceDetailsComponent,
     HomeComponent,
+    CarTypeColorComponent,
   ],
   imports: [
     BrowserModule,
