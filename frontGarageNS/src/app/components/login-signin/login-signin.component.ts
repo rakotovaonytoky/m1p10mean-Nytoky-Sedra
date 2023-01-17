@@ -1,7 +1,8 @@
-import { LoginService } from './../../service/login/login.service';
+import { LoginService } from 'src/app/service/login/login.service';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/classes/custom-validator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-signin',
@@ -11,7 +12,8 @@ import { CustomValidators } from 'src/app/classes/custom-validator';
 export class LoginSigninComponent implements OnInit {
 
   constructor(
-    loginService: LoginService,
+    private loginService: LoginService,
+    private route: Router,
     public elRef: ElementRef) {
 
   }
@@ -76,12 +78,21 @@ export class LoginSigninComponent implements OnInit {
       this.submittedLogin = false;
       return;
     }
+    alert("email :" + this.userLogin.get('email')?.value + " password:" + this.userLogin.get('motDePasse')?.value);
+    this.loginService.loginUser(this.userLogin.get('email')?.value, this.userLogin.get('motDePasse')?.value).subscribe({
+      next: (user: any) => {
+        console.log("POINSS!!");
+        this.route.navigate(['/template/home']);
+      }, error: (error: any) => {
 
-    setTimeout(() => {
-      this.isLoginLoading = false;
-      this.button = 'Se connecter';
-      alert('Done loading');
-    }, 2000)
+        console.log("ERREUR!!");
+      }
+    })
+    // setTimeout(() => {
+    //   this.isLoginLoading = false;
+    //   this.button = 'Se connecter';
+    //   alert('Done loading');
+    // }, 2000)
 
     // this.loginservice.loginUser(this.userLogin.get('email'), this.userLogin.get('motDePasse'))
     //   .subscribe({
