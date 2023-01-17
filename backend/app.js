@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 
 
 //api inscription, insertion anah nouvelle utilisateur
-  app.post('/inscription',(req,res,next)=>{
+  app.post('/api/inscription',(req,res,next)=>{
     console.log({...req.body}); //mi_affiche ao @ console an'ilay  données recuperer
     delete req.body._id;  // asorina ilay id generer automatique inyy
     
@@ -59,7 +59,7 @@ app.use((req, res, next) => {
   });
 
 //maka data an'ny users rehetraaa
-  app.get('/users', (req, res, next) => {
+  app.get('/api/users', (req, res, next) => {
     User.find()
     .then(users => {
         console.log('affichage reussi');
@@ -72,7 +72,7 @@ app.use((req, res, next) => {
 
 
    //api login , migerer hoe valide ve ilay mail, ensuite hoe true ve mdp, mireturn données users izyy 
-  app.post('/login', async (req,res,next) =>{
+  app.post('/api/login', async (req,res,next) =>{
     try{
       const userData = await User.findOne({email: req.body.email});//manao select * where email = email
       const user = await User.checkUser(userData,req.body.password);//manao check hoe mi_existe ve ilay mail ary marina ve mdp
