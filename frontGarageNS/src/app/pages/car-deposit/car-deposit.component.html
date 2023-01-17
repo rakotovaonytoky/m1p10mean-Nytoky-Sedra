@@ -1,1 +1,54 @@
-<app-slider></app-slider>
+<div class="holy-grail">
+    <app-slider></app-slider>
+    <p class="fs-2 text-center">Déposer votre voiture</p>
+    <br>
+    <main class="holy-grail__main">
+        <!-- Left sidebar -->
+        <aside class="holy-grail__left">
+            <h2 class="h2 fw-bold text-center mt-1">Vos voitures</h2>
+            <div class="list-car">
+                <div class="car-details"  cdkDrag>
+                    <div class="car-detail-type">
+
+                        <app-car-type-color [type]="2" [color]="'black'">
+                        </app-car-type-color>
+                        <span class="car-brand">Wolswagen Polo4</span>
+                    </div>
+                    <span class="fw-bold">444 TBN</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <article class="holy-grail__middle">
+            <div class="drag-drop"></div>
+            <div class="car-deposition">
+                <form class="car-deposition-form">
+                    
+                        <mat-form-field appearance="outline">
+                            <mat-label>Date de déposition</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    
+                
+                    <mat-form-field appearance="outline">
+                        <mat-label>Déscription du déposition</mat-label>
+                        <textarea class="car-deposition-input-area" matInput placeholder="Problème moteur"></textarea>
+                    </mat-form-field>
+                    <div class=" group-button ">
+                        <button mat-flat-button color="custom-primary" >Déposer</button>
+                        <button mat-flat-button color="seoncary" >Demander</button>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <!-- Right sidebar -->
+        <nav class="holy-grail__right">
+            <h2 class="h2 fw-bold text-center mt-1">Réparation</h2>
+        </nav>
+    </main>
+</div>

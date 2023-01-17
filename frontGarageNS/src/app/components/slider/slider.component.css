@@ -8,13 +8,14 @@
     padding-top: 75px;
     padding-bottom: 90px;
     position: relative;
+        overflow-y: hidden;
 }
 
 .slider_section::before {
 content: "";
     position: absolute;
     top: 308px;
-    left: 623px;
+    left: 330px;
     width: 650px;
     height: 650px;
     transform: translate(50%, -50%);

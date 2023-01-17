@@ -1,0 +1,102 @@
+.holy-grail {
+    display: flex;
+    flex-direction: column;
+    height: 1000px;
+    margin-bottom: 300px;
+}
+
+.holy-grail__main {
+    /* Take the remaining height */
+    flex-grow: 1;
+
+    /* Layout the left sidebar, main content and right sidebar */
+    display: flex;
+    flex-direction: row;
+}
+.holy-grail__main > *{
+    padding: 0 10px;
+    margin:0 10px;
+}
+.holy-grail__left {
+    width: 25%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
+    -webkit-box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
+    -moz-box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
+    /* border: 1px black solid; */
+}
+
+.holy-grail__middle {
+    /* Take the remaining width */
+    flex-grow: 1;
+   
+    
+}
+
+.holy-grail__right {
+    width: 20%;
+    background-color: azure;
+    width: 25%;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
+        -webkit-box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
+        -moz-box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
+}
+.holy-grail__middle .drag-drop{
+border: 0.25rem dashed #d1d5db;
+border-radius: 0.25rem;
+min-height: 400px;
+}
+.holy-grail__middle .car-deposition{
+    height: 200px;
+}
+.car-deposition{
+    margin: 30px 0 0 0;
+}
+.car-deposition-form{
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+}
+.car-deposition-input-text{
+    height: 10px !important;
+}
+.car-deposition-form .car-deposition-input{
+    /* width: 200px; */
+}
+.car-deposition-input-area{
+    /* min-height: 100px !important; */
+}
+.input-date{
+    height: 20px !;
+}
+.group-button{
+  text-align: right;
+}
+.group-button > button{
+ margin: 5px 10px;
+}
+.car-details {
+    /* background-color:bisque ; */
+    padding: 5px 5px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    font-size: 14px;
+}
+.car-detail-type{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+}
+.car-brand{
+  margin: 0 0 0 5px;
+}
+
