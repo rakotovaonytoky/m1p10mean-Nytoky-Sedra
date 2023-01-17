@@ -7,7 +7,7 @@
         <div class="input-group-sm">
         <label class="labels">Email</label>
             <input type="email" class="form-control form-control-sm" formControlName="email"
-            [ngClass]="{ 'is-invalid': (submittedLogin && l['email'].errors) || (l['email'].touched && l['email'].errors) }" 
+            [ngClass]="{ 'is-invalid': (submittedLogin && l['email']?.errors) || (l['email']?.touched && l['email']?.errors) }" 
             />
             <div *ngIf="(submittedLogin && l['email'].errors) || (l['email']?.touched && l['email'].errors)" class="invalid-feedback">
                     <div *ngIf="l['email'].errors['required']">
@@ -46,30 +46,62 @@
             </div>
         </div>
         <div class="form sign-up">
-            <form [formGroup]="userLogin" (ngSubmit)="register()">
-            <h2>Il est temps de réparer votre voiture,</h2>
-            <div class="input-group-sm">
-                <label>
-                    <span>Nom</span>
-                    <input type="text" />
-                </label>
-            </div>
-            <label>
-                <span>Email</span>
-                <input type="email" />
-            </label>
-            <label>
-                <span>Mot de passe</span>
-                <input type="password" />
-            </label>
-            <label>
-                <span>Confirmer</span>
-                <input type="password" />
-            </label>
-            <button type="submit" class="submit"  [disabled]="isLoginLoading" >
-                <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoginLoading, 'fa-check': !isLoginLoading}"></i>
-                &nbsp;{{buttonRegister}}
-            </button>
+            <form [formGroup]="userRegister" (ngSubmit)="register()">
+                <h2>Il est temps de réparer votre voiture,</h2>
+                <div class="input-group-sm">
+                    <label class="labels">Nom</label>
+                    <input type="nom" class="form-control form-control-sm" formControlName="nom"
+                        [ngClass]="{ 'is-invalid': (submiteRegister && r['nom'].errors) || (r['nom'].touched && r['nom'].errors) }" />
+                    <div *ngIf="(submiteRegister && r['nom'].errors) || (r['nom']?.touched && r['nom'].errors)"
+                        class="invalid-feedback">
+                        <div *ngIf="r['nom'].errors['required']">
+                            Veuillez préciser votre nom.
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group-sm">
+                    <label class="labels">Email</label>
+                    <input type="email" class="form-control form-control-sm" formControlName="email"
+                        [ngClass]="{ 'is-invalid': (submiteRegister && r['email'].errors) || (r['email'].touched && r['email'].errors) }" />
+                    <div *ngIf="(submiteRegister && r['email'].errors) || (r['email']?.touched && r['email'].errors)"
+                        class="invalid-feedback">
+                        <div *ngIf="r['email'].errors['required']">
+                            Veuillez préciser votre email.
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group-sm">
+                    <label class="labels">Mot de passe</label>
+                    <input type="password" class="form-control form-control-sm" formControlName="motDePasse"
+                        [ngClass]="{ 'is-invalid': (submiteRegister && r['motDePasse'].errors) || (r['motDePasse'].touched && r['motDePasse'].errors) }" />
+                    <div *ngIf="(submiteRegister && r['motDePasse'].errors) || (r['motDePasse']?.touched && r['motDePasse'].errors)"
+                        class="invalid-feedback">
+                        <div *ngIf="r['motDePasse'].errors['required']">
+                            Veuillez préciser votre mot de passe.
+                        </div>
+                        <div *ngIf="r['motDePasse'].errors['mustMatch']">
+                            Veuillez bien confirmer votre mot de passe.
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group-sm">
+                    <label class="labels">Confirmer</label>
+                    <input type="password" class="form-control form-control-sm" formControlName="confirmer"
+                        [ngClass]="{ 'is-invalid': (submiteRegister && r['confirmer'].errors) || (r['confirmer'].touched && r['confirmer'].errors) }" />
+                    <div *ngIf="(submiteRegister && r['confirmer'].errors) || (r['confirmer']?.touched && r['confirmer'].errors)"
+                        class="invalid-feedback">
+                        <div *ngIf="r['confirmer'].errors['required']">
+                            Veuillez préciser votre mot de passe.
+                        </div>
+                        <div *ngIf="r['confirmer'].errors['mustMatch']">
+                            Veuillez bien confirmer votre mot de passe.
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="submit" >
+                    <i class="fa" [ngClass]="{'fa-spin fa-spinner': isRegisterLoading, 'fa-check': !isRegisterLoading}"></i>
+                    &nbsp;{{buttonRegister}}
+                </button>
             </form>
         </div>
     </div>

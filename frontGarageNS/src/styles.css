@@ -35,7 +35,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-flat-button,
 .mat-raised-button,
 .mat-fab {
-    border-radius: 15px !important;
+    /* border-radius: 15px !important; */
 }
 
 .mat-button.mat-success,
@@ -106,4 +106,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: #F44336;
     color: white !important;
     border: none;
+}
+.mat-custom-primary {
+    display: inline-block;
+    background-color: #ff6f3d;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    border: 1px solid #ff6f3d;
+    -webkit-transition: all .3s;
+    transition: all .3s;
 }

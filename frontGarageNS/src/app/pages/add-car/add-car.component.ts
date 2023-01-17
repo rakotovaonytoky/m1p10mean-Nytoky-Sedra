@@ -66,11 +66,12 @@ export class AddCarComponent implements OnInit {
 
   getCarType() {
     this.typeCars$ = of([
-      { idType: 1, value: "Légère" },
-      { idType: 2, value: "4x4" },
-      { idType: 3, value: "SUV" },
-      { idType: 4, value: "Camionette" },
-      { idType: 5, value: "Camion" },
+      { idType: 1, value: "Micro" },
+      { idType: 2, value: "Légère" },
+      { idType: 3, value: "4x4" },
+      { idType: 4, value: "SUV" },
+      { idType: 5, value: "Camionette" },
+      { idType: 6, value: "Camion" },
     ])
 
   }

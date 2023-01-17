@@ -21,6 +21,10 @@ export class LoginSigninComponent implements OnInit {
   buttonRegister = 'Créer';
   submittedLogin = false;
   isLoginLoading = false;
+
+  submiteRegister = false;
+  isRegisterLoading = false;
+
   userRegister = new FormGroup({
     nom: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
@@ -49,9 +53,12 @@ export class LoginSigninComponent implements OnInit {
   }
 
   register() {
-    this.isLoginLoading = true;
+    this.isRegisterLoading = true;
     this.buttonRegister = 'Chargement';
 
+    if (this.userRegister.valid) {
+      console.log(this.userRegister.value);
+    }
     setTimeout(() => {
       this.isLoginLoading = false;
       this.buttonRegister = 'Créer';

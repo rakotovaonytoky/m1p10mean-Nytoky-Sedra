@@ -20,6 +20,7 @@ import { CarInvoiceComponent } from './pages/car-invoice/car-invoice.component';
 import { CarInvoiceDetailsComponent } from './pages/car-invoice-details/car-invoice-details.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CarTypeColorComponent } from './components/car-type-color/car-type-color.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CarTypeColorComponent } from './components/car-type-color/car-type-colo
     CarInvoiceDetailsComponent,
     HomeComponent,
     CarTypeColorComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,

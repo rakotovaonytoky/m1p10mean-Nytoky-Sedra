@@ -1,0 +1,112 @@
+.slider_section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 75px;
+    padding-bottom: 90px;
+    position: relative;
+}
+
+.slider_section::before {
+content: "";
+    position: absolute;
+    top: 308px;
+    left: 623px;
+    width: 650px;
+    height: 650px;
+    transform: translate(50%, -50%);
+    background-color: #f3ecdb;
+    border-radius: 100%;
+    z-index: -1;
+}
+
+.slider_section .row {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.slider_section #customCarousel1 {
+    width: 100%;
+    position: unset;
+}
+
+.slider_section .detail-box h1 {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.slider_section .detail-box .btn-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 -5px;
+}
+
+.slider_section .detail-box a {
+    margin: 5px;
+    width: 175px;
+    text-align: center;
+}
+
+.slider_section .detail-box .btn-1 {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #ff6f3d;
+    color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #ff6f3d;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    text-decoration: none;
+}
+
+.slider_section .detail-box .btn-1:hover {
+    background-color: transparent;
+    color: #ff6f3d;
+}
+
+.slider_section .detail-box .btn-2 {
+    display: inline-block;
+    padding: 10px 5px;
+    background-color: #625a52;
+    color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #625a52;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    text-decoration: none;
+}
+
+.slider_section .detail-box .btn-2:hover {
+    background-color: transparent;
+    color: #625a52;
+}
+
+.slider_section .img-box img {
+    width: 100%;
+}
+
+.slider_section .carousel-indicators {
+    position: unset;
+    margin-top: 60px;
+}
+
+.slider_section .carousel-indicators li {
+    opacity: 1;
+    background-color: #625a52;
+    border: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 15px;
+}
+
+.slider_section .carousel-indicators li.active {
+    width: 25px;
+    background-color: #ff6f3d;
+}
