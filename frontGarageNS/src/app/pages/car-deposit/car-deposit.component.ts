@@ -1,3 +1,4 @@
+import { Car } from './../../classes/car';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarDepositComponent implements OnInit {
 
+  tableCar!: Car[];
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getUnDepositCar() {
+    //   this.tableCar = [
+    //     { }
+    //   ]
   }
 
 }

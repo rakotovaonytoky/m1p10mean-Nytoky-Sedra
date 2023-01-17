@@ -25,6 +25,7 @@
     -webkit-box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
     -moz-box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
     /* border: 1px black solid; */
+    overflow-y: auto;
 }
 
 .holy-grail__middle {
@@ -78,6 +79,7 @@ min-height: 400px;
 .group-button > button{
  margin: 5px 10px;
 }
+
 .car-details {
     /* background-color:bisque ; */
     padding: 5px 5px;
@@ -98,5 +100,42 @@ min-height: 400px;
 }
 .car-brand{
   margin: 0 0 0 5px;
+}
+/* plate */
+#plate {
+    display: block;
+    width: 113px;
+    height: 22px;
+    background-color: #FFFF00;
+    border: 3px solid;
+    border-radius: 5px;
+}
+
+#number {
+    text-align: center;
+    padding: 0px 0 0px 0px;
+    color: #000000;
+    font-family: Trebuchet MS;
+    font-size: 16px;
+    font-weight: bold;
+}
+#plate {
+    background: #ffff00;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #ffff00 0%, #ffff99 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffff00), color-stop(100%, #ffff66));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffff00 0%, #ffff99 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffff00 0%, #ffff99 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffff00 0%, #ffff99 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #ffff00 0%, #ffff99 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff00', endColorstr='#ffff99', GradientType=0);
+    /* IE6-9 */
+
 }
 
