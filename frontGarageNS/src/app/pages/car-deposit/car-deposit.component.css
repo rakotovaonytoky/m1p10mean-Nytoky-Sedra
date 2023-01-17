@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 1000px;
-    margin-bottom: 300px;
+    margin-bottom: 400px;
 }
 
 .holy-grail__main {
@@ -25,7 +25,6 @@
     -webkit-box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
     -moz-box-shadow: 3px 5px 5px -3px rgba(74, 70, 70, 0.75);
     /* border: 1px black solid; */
-    overflow-y: auto;
 }
 
 .holy-grail__middle {
@@ -138,4 +137,11 @@ min-height: 400px;
     /* IE6-9 */
 
 }
+.list-car{
+    /* height: 200px;
+    background-color: #000000; */
+}
+/* .drag-drop{
+    width: 200px;
+} */
 

@@ -1,5 +1,5 @@
 export class Car {
-    vType!: string;
+    vType!: any;
     vColor!: string;
     brand!: string;
     model!: string;

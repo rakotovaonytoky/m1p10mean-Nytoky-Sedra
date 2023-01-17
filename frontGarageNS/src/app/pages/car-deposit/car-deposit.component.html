@@ -4,19 +4,24 @@
     <br>
     <main class="holy-grail__main">
         <!-- Left sidebar -->
-        <aside class="holy-grail__left">
+        <aside class="holy-grail__left" cdkDropListGroup>
             <h2 class="h2 fw-bold text-center mt-1">Vos voitures</h2>
-            <div class="list-car">
-                <div class="car-details"  cdkDrag>
+            <div class="list-car" cdkDropList
+                #toDepositCars="cdkDropList"
+                [cdkDropListData]="tableCar"
+                (cdkDropListDropped)="drop($event)"
+                 [cdkDropListConnectedTo]="[deposit]"
+                >
+                <div class="car-details" *ngFor="let car of tableCar"  cdkDrag>
                     <div class="car-detail-type">
 
-                        <app-car-type-color [type]="2" [color]="'black'">
+                        <app-car-type-color [type]="car.vType" [color]="car.vColor">
                         </app-car-type-color>
-                        <span class="car-brand fw-bold">Wolswagen Polo4</span>
+                        <span class="car-brand fw-bold">{{car.model}}</span>
                     </div>
                     <div id="plate">
                         <div id="number">
-                            4444 TBN
+                            {{car.licensePlate}}
                         </div>
                     </div>
                 </div>
@@ -25,8 +30,31 @@
 
         <!-- Main content -->
         <article class="holy-grail__middle">
-            <div class="drag-drop"></div>
-            <div class="car-deposition">
+            <div class="drag-drop"
+            cdkDropList
+            #deposit="cdkDropList"
+            [cdkDropListData]="depositCar"
+            [cdkDropListConnectedTo]="[toDepositCars]"
+            (cdkDropListDropped)="drop($event)"
+            >
+                <!-- <div class="draged-car">
+
+                </div> -->
+                <div class="car-details " *ngFor="let cars of depositCar" cdkDrag>
+                    <div class="car-detail-type">
+                
+                        <app-car-type-color [type]="cars.vType" [color]="cars.vColor">
+                        </app-car-type-color>
+                        <span class="car-brand fw-bold">{{cars.model}}</span>
+                    </div>
+                    <div id="plate">
+                        <div id="number">
+                            {{cars.licensePlate}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="car-deposition d-none">
                 <form class="car-deposition-form">
                     
                         <mat-form-field appearance="outline">
