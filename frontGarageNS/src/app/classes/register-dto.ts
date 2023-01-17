@@ -1,5 +1,10 @@
 export class RegisterDto {
-    nom!: string;
+    name!: string;
     email!: string;
-    motDePasse!: string;
+    password!: string;
+    confirmPassword!: string;
+
+    public constructor(init?: Partial<RegisterDto>) {
+        Object.assign(this, init);
+    }
 }

@@ -1,3 +1,4 @@
+import { RegisterDto } from './../../classes/register-dto';
 import { LoginService } from 'src/app/service/login/login.service';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -23,9 +24,13 @@ export class LoginSigninComponent implements OnInit {
   buttonRegister = 'Créer';
   submittedLogin = false;
   isLoginLoading = false;
+  loginErrorMessage!: any;
 
   submiteRegister = false;
   isRegisterLoading = false;
+  submittedRegister = false;
+  registerErrorMessage!: any;
+  registerSuccessMessage!: any;
 
   userRegister = new FormGroup({
     nom: new FormControl('', Validators.required),
@@ -55,55 +60,71 @@ export class LoginSigninComponent implements OnInit {
   }
 
   register() {
-    this.isRegisterLoading = true;
-    this.buttonRegister = 'Chargement';
 
-    if (this.userRegister.valid) {
-      console.log(this.userRegister.value);
-    }
-    setTimeout(() => {
-      this.isLoginLoading = false;
-      this.buttonRegister = 'Créer';
-      alert('Done loading');
-    }, 8000)
-  }
-  login() {
-    this.isLoginLoading = true;
-    this.button = 'Chargement';
-    this.submittedLogin = true;
+    this.registerLoader(true, 'Chargement');
 
-    if (this.userLogin.invalid) {
-      this.isLoginLoading = false;
-      this.button = 'Se connecter';
-      this.submittedLogin = false;
+    if (this.userRegister.invalid) {
+      this.registerLoader(false, 'Créer');
       return;
     }
-    alert("email :" + this.userLogin.get('email')?.value + " password:" + this.userLogin.get('motDePasse')?.value);
+    const user = new RegisterDto({
+      name: this.userRegister.get('nom')?.value,
+      email: this.userRegister.get('email')?.value,
+      password: this.userRegister.get('motDePasse')?.value,
+      confirmPassword: this.userRegister.get('confirmer')?.value,
+    });
+
+    // this.loginService.register
+
+    this.loginService.register(user).subscribe({
+      next: (user: any) => {
+        this.registerSuccessMessage = "Compte créé avec succès";
+        this.registerLoader(false, 'Créer');
+        alert("success");
+      }, error: (error: any) => {
+        console.log(error);
+
+        if (error.status == 0) {
+          alert(error.message);
+          this.registerErrorMessage = 'Erreur interne du serveur ';
+        } else {
+          this.registerErrorMessage = "Une erreur s'est produite";
+        }
+        this.loginLoader(false, 'Se connecter');
+        this.registerLoader(false, 'Créer');
+
+        console.log("ERREUR!!");
+      }, complete: () => {
+        this.registerLoader(false, 'Créer');
+      }
+    })
+  }
+
+  login() {
+    this.loginLoader(true, 'Chargement');
+
+    if (this.userLogin.invalid) {
+      this.loginLoader(false, 'Se connecter');
+      return;
+    }
     this.loginService.loginUser(this.userLogin.get('email')?.value, this.userLogin.get('motDePasse')?.value).subscribe({
       next: (user: any) => {
-        console.log("POINSS!!");
+
         this.route.navigate(['/template/home']);
       }, error: (error: any) => {
+        console.log(error);
+
+        if (error.status == 0) {
+          alert(error.message);
+          this.loginErrorMessage = 'Erreur interne du serveur ';
+        } else {
+          this.loginErrorMessage = error.message.text;
+        }
+        this.loginLoader(false, 'Se connecter');
 
         console.log("ERREUR!!");
       }
     })
-    // setTimeout(() => {
-    //   this.isLoginLoading = false;
-    //   this.button = 'Se connecter';
-    //   alert('Done loading');
-    // }, 2000)
-
-    // this.loginservice.loginUser(this.userLogin.get('email'), this.userLogin.get('motDePasse'))
-    //   .subscribe({
-    //   next: (data: any) => {
-
-    //   }, error: (err: any) => {
-
-    //   }, complete: () => {
-
-    //   }
-    // })
   }
 
   get r() {
@@ -111,6 +132,18 @@ export class LoginSigninComponent implements OnInit {
   }
   get l() {
     return this.userLogin.controls;
+  }
+
+  loginLoader(isloading: boolean, text: string) {
+    this.isLoginLoading = isloading;
+    this.button = text;
+    this.submittedLogin = isloading;
+  }
+
+  registerLoader(isloading: boolean, text: string) {
+    this.isRegisterLoading = isloading;
+    this.buttonRegister = text;
+    this.submittedRegister = isloading;
   }
 
 

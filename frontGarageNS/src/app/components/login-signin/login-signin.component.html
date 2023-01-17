@@ -25,9 +25,13 @@
                 </div>
             </div>
             </div>
+          
         <button type="submit" class="submit"  [disabled]="isLoginLoading"  >
             <i class="fa"[ngClass]="{'fa-spin fa-spinner': isLoginLoading, 'fa-check': !isLoginLoading}"></i> &nbsp;{{button}}
         </button>
+        <div class="alert alert-danger" role="alert" *ngIf="loginErrorMessage">
+           {{loginErrorMessage}}
+        </div>
     </form>
     </div>
     <div class="sub-cont">
@@ -73,11 +77,14 @@
                 <div class="input-group-sm">
                     <label class="labels">Mot de passe</label>
                     <input type="password" class="form-control form-control-sm" formControlName="motDePasse"
-                        [ngClass]="{ 'is-invalid': (submiteRegister && r['motDePasse'].errors) || (r['motDePasse'].touched && r['motDePasse'].errors) }" />
+                        [ngClass]="{ 'is-invalid': (submiteRegister && r['motDePasse'].errors) || (r['motDePasse'].touched && r['motDePasse'].errors) }" [minlength]="8"/>
                     <div *ngIf="(submiteRegister && r['motDePasse'].errors) || (r['motDePasse']?.touched && r['motDePasse'].errors)"
                         class="invalid-feedback">
                         <div *ngIf="r['motDePasse'].errors['required']">
                             Veuillez préciser votre mot de passe.
+                        </div>
+                        <div *ngIf="r['motDePasse'].errors['minlength']">
+                            Votre mot de passe doit comporter + 8 caractères.
                         </div>
                         <div *ngIf="r['motDePasse'].errors['mustMatch']">
                             Veuillez bien confirmer votre mot de passe.
@@ -91,17 +98,23 @@
                     <div *ngIf="(submiteRegister && r['confirmer'].errors) || (r['confirmer']?.touched && r['confirmer'].errors)"
                         class="invalid-feedback">
                         <div *ngIf="r['confirmer'].errors['required']">
-                            Veuillez préciser votre mot de passe.
+                           =Veuillez bien confirmer votre mot de passe.
                         </div>
                         <div *ngIf="r['confirmer'].errors['mustMatch']">
                             Veuillez bien confirmer votre mot de passe.
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="submit" >
+                <button type="submit" class="submit"  [disabled]="isRegisterLoading">
                     <i class="fa" [ngClass]="{'fa-spin fa-spinner': isRegisterLoading, 'fa-check': !isRegisterLoading}"></i>
                     &nbsp;{{buttonRegister}}
                 </button>
+                <div class="alert alert-danger" role="alert" *ngIf="registerErrorMessage">
+                    {{registerErrorMessage}}
+                </div>
+                <div class="alert alert-success" role="alert" *ngIf="registerSuccessMessage">
+                    {{registerSuccessMessage}}
+                </div>
             </form>
         </div>
     </div>

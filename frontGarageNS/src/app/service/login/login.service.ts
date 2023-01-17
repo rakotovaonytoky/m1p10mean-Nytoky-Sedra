@@ -1,3 +1,4 @@
+import { RegisterDto } from './../../classes/register-dto';
 import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -17,5 +18,9 @@ export class LoginService {
       password: passwordd
     }
     return this.httpclient.post(API_URL + "login", user);
+  }
+
+  register(user: RegisterDto): Observable<any> {
+    return this.httpclient.post<any>(API_URL + "inscription", user);
   }
 }

@@ -285,3 +285,11 @@ input {
     max-width: 280px !important;
         margin: 0 auto !important;
 }
+.alert{
+        margin: 0 auto;
+            height: 50px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
