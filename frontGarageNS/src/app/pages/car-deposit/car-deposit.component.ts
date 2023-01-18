@@ -13,12 +13,17 @@ export class CarDepositComponent implements OnInit {
   depositCar!: Car[];
   reparationList!: TypeReparation[];
   reparationSelected!: TypeReparation[];
+
+  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+
+  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
   constructor() { }
 
   ngOnInit(): void {
     this.getUnDepositCar();
-    this.depositCar = [];
     this.getListReparation();
+    this.depositCar = [];
+    this.reparationSelected = [{ idType: 1, value: "Diagnositque", img: "1.png" }];
   }
 
   getUnDepositCar() {
@@ -45,24 +50,65 @@ export class CarDepositComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      // alert("Previous container :" + event.previousContainer + " container:" + event.container);
+      // alert(event.previousContainer.id);
+      // alert(event.container.id);
       this.checkIfCarInDeposit(event);
     }
   }
 
   checkIfCarInDeposit(event: CdkDragDrop<Car[]>) {
-    if (this.depositCar.length < 1) {
-      alert("manisy voalohany" + this.depositCar.length);
 
+    if (event.previousContainer.id === "cdk-drop-list-0" && event.container.id === "cdk-drop-list-1") {
+      if (this.depositCar.length < 1) {
+        alert("manisy voalohany" + this.depositCar.length);
+
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+      } else {
+        alert("efa misy automobile ao");
+      }
+
+    }
+
+    // else {
+    //   alert("efa misy automobile");
+    // }
+  }
+
+  dropReparation(event: CdkDragDrop<TypeReparation[]>) {
+    alert(" event.previousIndex :" + event.previousIndex + " event.currentIndex," + event.currentIndex);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
+    }
+  }
 
-
+  resetDeposit() {
+    if (this.depositCar.length == 1) {
+      window.location.reload();
+    }
+  }
+  drop1(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      alert("efa misy automobile");
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
     }
   }
 

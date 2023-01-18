@@ -168,3 +168,6 @@ max-height: 400px;
     align-items: baseline;
     margin: 0 10px;
 }
+.reset-button{
+    float: left;;
+}

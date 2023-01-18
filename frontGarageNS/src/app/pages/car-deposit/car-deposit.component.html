@@ -54,11 +54,48 @@
                     </div>
                 </div>
             </div>
-            <div class="drag-drop-repair">
-                <div class="repair">
-
-                </div>
+            <div class="drag-drop-repair" >
+                <!-- <p class="text-center fw-bold">réparations séléctionnées</p> -->
+                <!-- <div class="repair"
+                cdkDropList
+                     #depositeReparation="cdkDropList"
+                      [cdkDropListData]="reparationSelected"
+                      [cdkDropListConnectedTo]="[reparationToDeposit]"
+                      (cdkDropListDropped)="dropReparation($event)">
+                   
+                     
+                    <div *ngFor="let rs of reparationSelected" cdkDrag>
+                        <img  src="/assets/img/reparation/{{rs.img}}"
+                            alt="reparation Type" />
+                    {{rs.value}}
+                    </div>
+                  
+                </div> -->
+                    
+                   <!-- <div class="container">
+                    <div class="repair-list" cdkDropList #doneList="cdkDropList" [cdkDropListData]="reparationSelected"
+                        [cdkDropListConnectedTo]="[todoList]" (cdkDropListDropped)="drop1($event)">
+                        <div class="repair-details" *ngFor="let rs of reparationSelected">
+                            {{rs.value}}
+                        </div>
+                    </div>
+                   </div> -->
+                   <div class="container">
+                    <mat-chip-list aria-label="Dog selection"cdkDropList #doneList="cdkDropList" [cdkDropListData]="reparationSelected"
+                        [cdkDropListConnectedTo]="[todoList]" (cdkDropListDropped)="drop1($event)">
+                        <mat-chip  *ngFor="let rs of reparationSelected" cdkDrag>
+                            <img matChipAvatar src="/assets/img/reparation/{{rs.img}}"
+                                alt="image" />
+                        {{rs.value}}
+                        </mat-chip>
+                       
+                    </mat-chip-list>
+                   </div>
+                
             </div>
+        <div class=" group-button ">
+            <button mat-flat-button color="custom-error" (click)="resetDeposit()">Effacer</button>
+        </div>
             <div class="car-deposition">
                 <form class="car-deposition-form">
                     
@@ -84,14 +121,32 @@
         </article>
 
         <!-- Right sidebar -->
-        <nav class="holy-grail__right">
+        <nav class="holy-grail__right" >
             <h2 class="h2 fw-bold text-center mt-1">Suggestion de réparation</h2>
-            <div class="repair-list">
-                <div class="repair-details" *ngFor="let r of reparationList">
+            <!-- <div class="repair-list"
+            cdkDropList
+            #reparationToDeposit="cdkDropList"
+            [cdkDropListData]="reparationList"
+            (cdkDropListDropped)="dropReparation($event)"
+            [cdkDropListConnectedTo]="[depositeReparation]"
+            >
+                <div class="repair-details" *ngFor="let r of reparationList" cdkDrag>
                     <img src="/assets/img/reparation/{{r.img}}" alt="">
                     <span class="reparation-name fw-bold">{{r.value}}</span>
                 </div>
-            </div>
+            </div> -->
+              
+                    <div class="container">
+                        <h2>To do</h2>
+                        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="reparationList" [cdkDropListConnectedTo]="[doneList]"
+                            class="repair-list" (cdkDropListDropped)="drop1($event)">
+                            <div class="repair-details" *ngFor="let r of reparationList" cdkDrag>
+                                <img src="/assets/img/reparation/{{r.img}}" alt="">
+                              {{r.value}}
+                            </div>
+                        </div>
+                    </div>
+               
         </nav>
     </main>
 </div>

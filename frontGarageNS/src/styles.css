@@ -117,3 +117,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     -webkit-transition: all .3s;
     transition: all .3s;
 }
+.mat-custom-error {
+    display: inline-block;
+    background-color:#F44336;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    border: 1px solid #F44336;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
