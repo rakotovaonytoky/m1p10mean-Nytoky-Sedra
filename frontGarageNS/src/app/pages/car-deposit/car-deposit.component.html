@@ -54,7 +54,12 @@
                     </div>
                 </div>
             </div>
-            <div class="car-deposition d-none">
+            <div class="drag-drop-repair">
+                <div class="repair">
+
+                </div>
+            </div>
+            <div class="car-deposition">
                 <form class="car-deposition-form">
                     
                         <mat-form-field appearance="outline">
@@ -81,6 +86,12 @@
         <!-- Right sidebar -->
         <nav class="holy-grail__right">
             <h2 class="h2 fw-bold text-center mt-1">Suggestion de réparation</h2>
+            <div class="repair-list">
+                <div class="repair-details" *ngFor="let r of reparationList">
+                    <img src="/assets/img/reparation/{{r.img}}" alt="">
+                    <span class="reparation-name fw-bold">{{r.value}}</span>
+                </div>
+            </div>
         </nav>
     </main>
 </div>
