@@ -77,11 +77,11 @@
             <button mat-flat-button color="custom-error" (click)="resetDeposit()">Effacer</button>
         </div>
             <div class="car-deposition">
-                <form class="car-deposition-form">
+                <form class="car-deposition-form" [formGroup]="depositForm" (ngSubmit)="depositSubmitting()">
                     
                         <mat-form-field appearance="outline">
                             <mat-label>Date de déposition</mat-label>
-                            <input matInput [matDatepicker]="picker">
+                            <input matInput [matDatepicker]="picker" formControlName="date">
                             <mat-hint>MM/DD/YYYY</mat-hint>
                             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
@@ -90,7 +90,7 @@
                 
                     <mat-form-field appearance="outline">
                         <mat-label>Déscription du déposition</mat-label>
-                        <textarea class="car-deposition-input-area" matInput placeholder="Problème moteur"></textarea>
+                        <textarea class="car-deposition-input-area" matInput placeholder="Problème moteur" formControlName="description"></textarea>
                     </mat-form-field>
                     <div class=" group-button ">
                         <button mat-flat-button color="custom-primary" >Déposer</button>
@@ -104,8 +104,13 @@
         <nav class="holy-grail__right" >
             <h2 class="h2 fw-bold text-center mt-1">Suggestion de réparation</h2>
                     <div class="container">
-                        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="reparationList" [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="dropReparation($event)"
+                        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="reparationList" 
+                        [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="dropReparation($event)"
                             class="repair-list" >
+                            <div  class="repair-details"  >
+                                <img src="/assets/img/reparation/1.png" alt="" cdkDrag>
+                             test
+                            </div>
                             <div  class="repair-details" *ngFor="let r of reparationList" cdkDrag>
                                 <img src="/assets/img/reparation/{{r.img}}" alt="">
                               {{r.value}}

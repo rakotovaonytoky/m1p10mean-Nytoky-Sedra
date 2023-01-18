@@ -183,3 +183,6 @@ max-height: 400px;
 .default-chips{
     background-color: #ccc !important;
 }
+.repair-details:first-child {
+    background-color: #ccc;
+}

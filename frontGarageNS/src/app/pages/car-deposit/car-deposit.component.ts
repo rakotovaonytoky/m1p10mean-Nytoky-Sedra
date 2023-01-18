@@ -2,6 +2,7 @@ import { TypeReparation } from './../../classes/type-reparation';
 import { Car } from './../../classes/car';
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-car-deposit',
   templateUrl: './car-deposit.component.html',
@@ -14,10 +15,12 @@ export class CarDepositComponent implements OnInit {
   reparationList!: TypeReparation[];
   reparationSelected!: TypeReparation[];
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  depositForm = this._formBuilder.group({
+    date: ['', Validators.required],
+    description: ['', Validators.required],
+  });
 
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
-  constructor() { }
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.getUnDepositCar();
@@ -61,8 +64,6 @@ export class CarDepositComponent implements OnInit {
 
     if (event.previousContainer.id === "cdk-drop-list-0" && event.container.id === "cdk-drop-list-1") {
       if (this.depositCar.length < 1) {
-        alert("manisy voalohany" + this.depositCar.length);
-
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
@@ -102,6 +103,15 @@ export class CarDepositComponent implements OnInit {
       window.location.reload();
     }
   }
-
+  depositSubmitting() {
+    if (this.depositCar.length < 1) {
+      alert("mbola tsisy daba");
+      return;
+    }
+    if (this.depositForm.invalid) {
+      return;
+    }
+  }
 
 }
+
