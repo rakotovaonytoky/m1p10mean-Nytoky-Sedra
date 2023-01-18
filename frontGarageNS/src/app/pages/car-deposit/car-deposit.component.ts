@@ -23,7 +23,7 @@ export class CarDepositComponent implements OnInit {
     this.getUnDepositCar();
     this.getListReparation();
     this.depositCar = [];
-    this.reparationSelected = [{ idType: 1, value: "Diagnositque", img: "1.png" }];
+    this.reparationSelected = [];
   }
 
   getUnDepositCar() {
@@ -81,10 +81,13 @@ export class CarDepositComponent implements OnInit {
   }
 
   dropReparation(event: CdkDragDrop<TypeReparation[]>) {
-    alert(" event.previousIndex :" + event.previousIndex + " event.currentIndex," + event.currentIndex);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      if (this.depositCar.length < 1) {
+        alert("mbola tsisy daba");
+        return;
+      }
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -99,17 +102,6 @@ export class CarDepositComponent implements OnInit {
       window.location.reload();
     }
   }
-  drop1(event: CdkDragDrop<any[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-  }
+
 
 }

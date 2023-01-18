@@ -36,7 +36,6 @@
 
 .holy-grail__right {
     width: 20%;
-    background-color: azure;
     width: 25%;
         border-top-right-radius: 15px;
         border-bottom-right-radius: 15px;
@@ -145,7 +144,9 @@ max-height: 400px;
 
 .drag-drop-repair{
     min-height: 100px;
+    margin-top: 10px;
     background-color: #ccc;
+    border-radius: 10px;
 }
 .repair-details{
         padding: 5px 5px;
@@ -170,4 +171,15 @@ max-height: 400px;
 }
 .reset-button{
     float: left;;
+}
+.container{
+    min-height: 50px;
+    min-width: 50px;
+}
+.drag-drop-repair{
+    min-height: 100px;
+        min-width: 100px;
+}
+.default-chips{
+    background-color: #ccc !important;
 }
