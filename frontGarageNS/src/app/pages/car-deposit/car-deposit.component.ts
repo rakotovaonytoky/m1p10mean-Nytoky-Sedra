@@ -1,7 +1,7 @@
 import { TypeReparation } from './../../classes/type-reparation';
 import { Car } from './../../classes/car';
 import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-car-deposit',
   templateUrl: './car-deposit.component.html',

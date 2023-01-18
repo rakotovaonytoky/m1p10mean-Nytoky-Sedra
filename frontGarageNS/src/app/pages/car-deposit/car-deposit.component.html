@@ -104,9 +104,9 @@
         <nav class="holy-grail__right" >
             <h2 class="h2 fw-bold text-center mt-1">Suggestion de réparation</h2>
                     <div class="container">
-                        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="reparationList" [cdkDropListConnectedTo]="[doneList]"
-                            class="repair-list" (cdkDropListDropped)="dropReparation($event)">
-                            <div class="repair-details" *ngFor="let r of reparationList" cdkDrag>
+                        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="reparationList" [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="dropReparation($event)"
+                            class="repair-list" >
+                            <div  class="repair-details" *ngFor="let r of reparationList" cdkDrag>
                                 <img src="/assets/img/reparation/{{r.img}}" alt="">
                               {{r.value}}
                             </div>
