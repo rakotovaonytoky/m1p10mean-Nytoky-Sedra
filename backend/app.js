@@ -52,9 +52,19 @@ app.use(cors());
           console.log('[INFO] inscription reussi');
           res.status(201).json(user.email)
         })
-      .catch(error =>{
-         console.log('[INFO] utilisateur non enregistré');
-     res.status(400).send( error)});
+      .catch((error) => {
+        // catch uniquekey for Mail
+        let errMsg;
+        if (error.code == 11000) {
+          errMsg = Object.keys(error.keyValue)[0] + "exite déja";
+        } else {
+          errMsg = error.message;
+        }
+        res.status(400).json({ statusText: "Bad Request", message: errMsg });
+        console.log('[INFO] Email existant!');
+        
+      }); 
+  
     }
   });
 
@@ -80,9 +90,9 @@ app.use(cors());
       res.send(user.email);
       console.log('[INFO]  utilisateur valide \n[INFO]  connecté en tant que '+user.email);
        // manome res an'le data user
-    } catch(e) {
-      console.log(e);   
-      res.status(403).send(e);
+    } catch(err) {
+     console.log('error : login ou mot de passe erronée');
+      res.status(403).json({message:'login ou mot de passe erronée'})
     }
   });
 

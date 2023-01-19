@@ -17,9 +17,10 @@ const userSchema = mongoose.Schema(
              email:{
                 type:String,
                 required:true,
-                unique : true,
+                 unique : true,
                 validate(v){
                     if(!validator.isEmail(v)) throw new Error('Email invalide !');
+                
                 }// michek hoe valide ve format ilay email
             },
              password:{
@@ -45,8 +46,11 @@ userSchema.statics.checkUser = async(userData, password) =>{
     const isPasswordValid = await bcrypt.compare(password,userData.password);
          if (!isPasswordValid){
             console.log('[INFO] **************password invalide**********');
-            throw new Error ('Erreur de login: mot de passe eronnée');
-         }
+            res.status(403).json({ message :'Erreur de login: mot de passe eronnée'});
+            throw new Error ('Erreur de login: mot de passe eronnée');s
+        }
+            
+           
          console.log('[INFO] valid password,connexion....');
          
     return userData;//mireturn datauser rehefa vrai daholo
