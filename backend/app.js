@@ -56,7 +56,7 @@ app.use(cors());
         // catch uniquekey for Mail
         let errMsg;
         if (error.code == 11000) {
-          errMsg = Object.keys(error.keyValue)[0] + "exite déja";
+          errMsg = "L' "+Object.keys(error.keyValue)[0] + " existe déjà";
         } else {
           errMsg = error.message;
         }
