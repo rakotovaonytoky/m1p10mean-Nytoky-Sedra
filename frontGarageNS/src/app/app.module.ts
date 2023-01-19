@@ -21,6 +21,7 @@ import { CarInvoiceDetailsComponent } from './pages/car-invoice-details/car-invo
 import { HomeComponent } from './pages/home/home.component';
 import { CarTypeColorComponent } from './components/car-type-color/car-type-color.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { CarCardProgressComponent } from './components/car-card-progress/car-card-progress.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SliderComponent } from './components/slider/slider.component';
     HomeComponent,
     CarTypeColorComponent,
     SliderComponent,
+    CarCardProgressComponent,
   ],
   imports: [
     BrowserModule,
