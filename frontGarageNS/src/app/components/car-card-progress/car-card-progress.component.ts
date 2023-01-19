@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-car-card-progress',
@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarCardProgressComponent implements OnInit {
 
+
+  @Input() vColor!: any;
+  @Input() vType!: any;
+  @Input() date!: any;
+  @Input() licencePlate!: any;
   constructor() { }
 
   ngOnInit(): void {
