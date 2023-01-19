@@ -87,7 +87,7 @@ app.use(cors());
       console.log('[INFO] test login');
       const userData = await User.findOne({email: req.body.email});//manao select * where email = email
       const user = await User.checkUser(userData,req.body.password);//manao check hoe mi_existe ve ilay mail ary marina ve mdp
-      res.send(user.email);
+      res.json({user :user.email});
       console.log('[INFO]  utilisateur valide \n[INFO]  connecté en tant que '+user.email);
        // manome res an'le data user
     } catch(err) {
