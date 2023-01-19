@@ -37,22 +37,27 @@ const userSchema = mongoose.Schema(
 //micheck hoe mi-existe ve ilay mail, ary true ve ilay mdp
 userSchema.statics.checkUser = async(userData, password) =>{
     if(!userData) {
-        console.log('**************Email invalide**********');
+        console.log('[INFO] **************Email invalide**********');
         throw new Error ('Erreur de login: Email non reconnue');
     }
+    console.log('[INFO] email :'+userData.email);
     //micompare le mdp @n'ilay mdp crypté   anaty base
     const isPasswordValid = await bcrypt.compare(password,userData.password);
          if (!isPasswordValid){
-            console.log('**************password invalide**********');
+            console.log('[INFO] **************password invalide**********');
             throw new Error ('Erreur de login: mot de passe eronnée');
          }
+         console.log('[INFO] valid password,connexion....');
+         
     return userData;//mireturn datauser rehefa vrai daholo
 }
 
 
 userSchema.pre('save', async function(){
+    console.log('[INFO] CRYPTAGE MotDePasse');
     if(this.isModified('password')) this.password = await bcrypt.hash(this.password,8);
     if(this.isModified('confirmPassword')) this.confirmPassword = await bcrypt.hash(this.confirmPassword,8);
+    console.log('[INFO] cryptage réussi');
     return 0;
 });
 

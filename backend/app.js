@@ -37,10 +37,10 @@ app.use(cors());
     //mamorona instance anah user iray asiana le data
     const user =new User( {
       ...req.body
-    });
-    console.log('1er mdp: '+user.password+'\n 2eme mdp: '+user.confirmPassword);
+     });
+    // console.log('1er mdp: '+user.password+'\n 2eme mdp: '+user.confirmPassword);
     if(!(user.password===user.confirmPassword)){
-      console.log('tsy poinsa annn');
+      console.log('password: '+user.password+'\nconfirmPassword : '+user.confirmPassword+'\n[INFO] MDP non identiques');
       res.status(400).json({
         message:'mot de passe non identique'
       })
@@ -49,15 +49,12 @@ app.use(cors());
    //mi_save ilay données any anaty base (user.save), misy fonction pre-save any @ models user micrypt mdp avant save
       user.save()
         .then(() =>{
-          console.log('inscription reussi');
-          res.status(201).json({
-          message:'utilisateur enregistré'
-          })
+          console.log('[INFO] inscription reussi');
+          res.status(201).json(user.email)
         })
-      .catch(() =>{
-        console.log('utilisateur non enregistré');
-        error => res.status(400).json( error)});
-    
+      .catch(error =>{
+         console.log('[INFO] utilisateur non enregistré');
+     res.status(400).send( error)});
     }
   });
 
@@ -65,10 +62,10 @@ app.use(cors());
   app.get('/api/users', (req, res, next) => {
     User.find()
     .then(users => {
-        console.log('affichage reussi');
+        console.log('[INFO] affichage reussi');
         res.status(200).json(users)})
     .catch(error =>{
-        console.log('erreur d affichage');
+        console.log('[INFO] erreur d affichage');
          res.status(400).json(error)});
     });
 
@@ -77,10 +74,11 @@ app.use(cors());
    //api login , migerer hoe valide ve ilay mail, ensuite hoe true ve mdp, mireturn données users izyy 
   app.post('/api/login', async (req,res,next) =>{
     try{
+      console.log('[INFO] test login');
       const userData = await User.findOne({email: req.body.email});//manao select * where email = email
       const user = await User.checkUser(userData,req.body.password);//manao check hoe mi_existe ve ilay mail ary marina ve mdp
-      res.send(user);
-      console.log('utilisateur valide \n connecté en tant que '+user.email);
+      res.send(user.email);
+      console.log('[INFO]  utilisateur valide \n[INFO]  connecté en tant que '+user.email);
        // manome res an'le data user
     } catch(e) {
       console.log(e);   
