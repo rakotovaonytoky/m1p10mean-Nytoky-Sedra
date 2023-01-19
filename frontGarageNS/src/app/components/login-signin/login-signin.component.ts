@@ -33,7 +33,7 @@ export class LoginSigninComponent implements OnInit {
   registerSuccessMessage!: any;
 
   userRegister = new FormGroup({
-    nom: new FormControl('', Validators.required),
+    nom: new FormControl('', [Validators.required]),
     email: new FormControl('', Validators.required),
     motDePasse: new FormControl('', [Validators.required, Validators.minLength(8)]),
     confirmer: new FormControl('', [Validators.required])
@@ -43,7 +43,7 @@ export class LoginSigninComponent implements OnInit {
 
 
   userLogin = new FormGroup({
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required]),
     motDePasse: new FormControl('', [Validators.required]),
   }
   );
@@ -88,7 +88,8 @@ export class LoginSigninComponent implements OnInit {
           alert(error.message);
           this.registerErrorMessage = 'Erreur interne du serveur ';
         } else {
-          this.registerErrorMessage = "Une erreur s'est produite";
+          console.log(error);
+          this.registerErrorMessage = error.error.message;
         }
         this.loginLoader(false, 'Se connecter');
         this.registerLoader(false, 'Créer');
@@ -118,7 +119,8 @@ export class LoginSigninComponent implements OnInit {
           alert(error.message);
           this.loginErrorMessage = 'Erreur interne du serveur ';
         } else {
-          this.loginErrorMessage = error.message.text;
+          console.log(error.error.message);
+          this.loginErrorMessage = error.error.message;
         }
         this.loginLoader(false, 'Se connecter');
 
