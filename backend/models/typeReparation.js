@@ -4,18 +4,16 @@ const typeReparationSchema = mongoose.Schema(
     {
         reference:{
             type:Number,
-            required:true
+            required:true,
+            unique: true
         },
         values: {
             type:String,
-            required:true 
+            required:true,
         },
         image:{
             type:String
         }
     }
 );
-
-
-
 module.exports= mongoose.model('TypeReparation',typeReparationSchema);
