@@ -1,6 +1,7 @@
 <div class="holy-grail">
-    <app-slider></app-slider>
-    <p class="fs-2 text-center">Déposer votre voiture</p>
+    <app-slider [pageDescription]="'Deposer votre voitures'"></app-slider>
+    <hr>
+    <p class="fs-2 text-center mt-2">Déposer votre voiture</p>
     <br>
     <main class="holy-grail__main">
         <!-- Left sidebar -->
@@ -109,7 +110,7 @@
                             class="repair-list" >
                             <div  class="repair-details"  >
                                 <img src="/assets/img/reparation/1.png" alt="" cdkDrag>
-                             test
+                            Selectionnez une réparation et deposez dans la zone gris.
                             </div>
                             <div  class="repair-details" *ngFor="let r of reparationList" cdkDrag>
                                 <img src="/assets/img/reparation/{{r.img}}" alt="">

@@ -1,4 +1,8 @@
+<app-slider [pageDescription]="'Historique des factures '"
+[pageimage]="'/assets/img/Car_Fixing_Vector_Illustration.png'" 
+></app-slider>
 <div class="container">
+
     <mat-form-field appearance="outline">
         <mat-label>Filtrer</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
