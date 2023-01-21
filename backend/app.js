@@ -119,11 +119,11 @@ app.post('/api/car',(req,res,next)=>{addCar(req,res)});
 
 
 const addTypeReparation= (req,res ) =>{
-  console.log({...req.body}); 
   delete req.body._id;  
   const typeReparation =new TypeReparation( {
     ...req.body
    });
+   console.log({...req.body}); 
    typeReparation.save()
       .then(() =>{
         console.log('[INFO] voiture Enregistré');
@@ -138,10 +138,11 @@ const addTypeReparation= (req,res ) =>{
 app.post('/api/suggestRepairs',(req,res,next)=>{addTypeReparation(req,res)});
 
 app.get('/api/suggestRepairs', (req, res, next) => {
-  TypeReparation.find()
+  TypeReparation.find({},{"reference":1,"values":1,"image":1,"_id":0})
 .then(typeReparations => {
     console.log('[INFO] affichage reussi');
-    res.status(200).json(typeReparations)})
+    
+    res.status(200).json({typeReparations})})
 .catch(error =>{
     console.log('[INFO] erreur d affichage');
      res.status(400).json(error)});
