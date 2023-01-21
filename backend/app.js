@@ -137,4 +137,14 @@ const addTypeReparation= (req,res ) =>{
     }
 app.post('/api/suggestRepairs',(req,res,next)=>{addTypeReparation(req,res)});
 
+app.get('/api/suggestRepairs', (req, res, next) => {
+  TypeReparation.find()
+.then(typeReparations => {
+    console.log('[INFO] affichage reussi');
+    res.status(200).json(typeReparations)})
+.catch(error =>{
+    console.log('[INFO] erreur d affichage');
+     res.status(400).json(error)});
+});
+
 module.exports = app;
