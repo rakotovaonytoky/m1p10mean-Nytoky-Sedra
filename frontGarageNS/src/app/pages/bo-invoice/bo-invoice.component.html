@@ -1,0 +1,84 @@
+<app-slider></app-slider>
+<div class="container mb-3">
+    <mat-form-field appearance="outline">
+        <mat-label>Filtrer</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+    <mat-expansion-panel class="advance-filter">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Filtres avancés
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="example-form-fields">
+            <form [formGroup]="filterForm" (ngSubmit)="onFilterSubmit()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Date</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start " formControlName="DateDebut">
+                        <input matEndDate placeholder="End" formControlName="DateFin">
+                    </mat-date-range-input>
+                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Matricule</mat-label>
+                    <input matInput placeholder="Ex. ium" formControlName="matricule">
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Etat</mat-label>
+                    <mat-select formControlName="etat">
+                        <mat-option value="one">First option</mat-option>
+                        <mat-option value="two">Second option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button type="submit" mat-flat-button color="custom-primary">Valider</button>
+                <button type="reset" mat-flat-button color="secondary">Effacer filtre</button>
+            </form>
+
+        </div>
+
+    </mat-expansion-panel>
+
+
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef>#. </mat-header-cell>
+            <mat-cell *matCellDef="let element; let index = index"> {{index+1}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="car">
+            <mat-header-cell *matHeaderCellDef> Voiture </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.car.licensePlate}} {{element.car.model}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> Date depôt </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.date | date: 'YYYY/MM/dd'}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="etat">
+            <mat-header-cell *matHeaderCellDef> etat </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <span class="badge-soft-success ">{{element.etat}}</span> </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="...">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-flat-button color="custom-primary" (click)="goInvoiceDetails(1)">Details</button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

@@ -1,0 +1,122 @@
+<app-slider></app-slider>
+<div class="page-content container">
+    
+    <div class="page-header text-blue-d2">
+        
+        <h1 class="d-flex page-title text-secondary-d1 fw-bold">
+            Deposer le :
+            <small class="page-info">
+                2023/01/10
+            </small>
+        </h1>
+       
+    </div>
+    <div class="container px-0">
+        <div class="row mt-4">
+            <div class="col-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div>
+                            <p class="h4">
+                                <span class="align-middle">Voiture:</span>
+                                <span class="text-600 text-110 text-blue align-middle"> 4444 TBN POLO 4</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="h4">
+                                <span class="align-middle">Proprietaire:</span>
+                                <span class="text-600 text-110 text-blue align-middle"> Rabe</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="h5">
+                                <span class="align-middle">Description Details:</span>
+                                <span class="text-600 text-110 text-blue align-middle"> ....</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container mb-3">
+        <div class="row">
+                <p class="h5 text-center">Suggestion reparation selectionnés</p>
+            <div class="col-12 col-lg-12">
+                <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+                    <ng-container matColumnDef="item">
+                        <th mat-header-cell *matHeaderCellDef> # </th>
+                        <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+                        
+                    </ng-container>
+                    <ng-container matColumnDef="cost">
+                        <th mat-header-cell *matHeaderCellDef> Suggestion </th>
+                        <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+                        
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  
+                </table>
+            </div>
+            <div class="d-flex justify-content-between  mt-3">
+                <button mat-raised-button color="secondary" (click)="backToDepot()">Retour</button>
+                <button class="" mat-raised-button color="custom-primary" (click)="validateDepot()">Valider depôt</button> 
+            </div>
+            <div class="d-flex justify-content-start mt-3">
+               
+            </div>
+        </div>
+    </div>
+    <div class="container mb-3">
+        <div class="row">
+                <p class="h5 text-center">Facture</p>
+                <div class="example-container d-flex align-bottom">
+                    <mat-form-field [style.width.px]="400" appearance="outline">
+                        <mat-label>Réparation</mat-label>
+                        <input matInput type="text">
+                        <button mat-icon-button matSuffix 
+                            >
+                            <mat-icon></mat-icon>
+                        </button>
+                    </mat-form-field>
+                
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label>montant</mat-label>
+                        <input matInput type="number" class="example-right-align" placeholder="0">
+                    </mat-form-field>
+                    <div style="margin-left: 10px;margin-top: 10px;">
+                        <button class="" mat-raised-button color="custom-primary" (click)="validateDepot()">Ajouter</button>
+
+                    </div>
+                </div>
+            <div class="col-12 col-lg-12">
+                <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+                    <ng-container matColumnDef="item">
+                        <th mat-header-cell *matHeaderCellDef> # </th>
+                        <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+                        
+                    </ng-container>
+                    <ng-container matColumnDef="cost">
+                        <th mat-header-cell *matHeaderCellDef> Suggestion </th>
+                        <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+                        
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  
+                </table>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+                <button class="" mat-raised-button color="custom-primary" (click)="validateDepot()">Clôturer</button> 
+            </div>
+            <div class="d-flex justify-content-start mt-3">
+               
+            </div>
+        </div>
+    </div>
+</div>
+

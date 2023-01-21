@@ -1,0 +1,11 @@
+table {
+    width: 100%;
+}
+.example-form-fields {
+    display: flex;
+    align-items: baseline;
+}
+
+.example-form-fields form>* {
+    margin: 0 15px;
+}

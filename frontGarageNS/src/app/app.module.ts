@@ -23,6 +23,13 @@ import { CarTypeColorComponent } from './components/car-type-color/car-type-colo
 import { SliderComponent } from './components/slider/slider.component';
 import { CarCardProgressComponent } from './components/car-card-progress/car-card-progress.component';
 import { BoCarProgressionComponent } from './pages/bo-car-progression/bo-car-progression.component';
+import { BoDepotComponent } from './pages/bo-depot/bo-depot.component';
+import { BoTemplateComponent } from './pages/bo-template/bo-template.component';
+import { BoHeaderComponent } from './components/bo-header/bo-header.component';
+import { BoCarDepotDetailComponent } from './pages/bo-car-depot-detail/bo-car-depot-detail.component';
+import { BoInvoiceDetailsComponent } from './pages/bo-invoice-details/bo-invoice-details.component';
+import { BoInvoiceComponent } from './pages/bo-invoice/bo-invoice.component';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +49,14 @@ import { BoCarProgressionComponent } from './pages/bo-car-progression/bo-car-pro
     CarTypeColorComponent,
     SliderComponent,
     CarCardProgressComponent,
-    BoCarProgressionComponent
+    BoCarProgressionComponent,
+    BoDepotComponent,
+    BoTemplateComponent,
+    BoHeaderComponent,
+    BoCarDepotDetailComponent,
+    BoInvoiceDetailsComponent,
+    BoInvoiceComponent,
+
   ],
   imports: [
     BrowserModule,

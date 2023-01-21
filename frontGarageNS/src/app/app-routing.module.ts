@@ -9,6 +9,12 @@ import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginSigninComponent } from './components/login-signin/login-signin.component';
 import { ErrorpageComponent } from './components/errorpage/errorpage.component';
+import { BoTemplateComponent } from './pages/bo-template/bo-template.component';
+import { BoDepotComponent } from './pages/bo-depot/bo-depot.component';
+import { BoCarProgressionComponent } from './pages/bo-car-progression/bo-car-progression.component';
+import { BoCarDepotDetailComponent } from './pages/bo-car-depot-detail/bo-car-depot-detail.component';
+import { BoInvoiceDetailsComponent } from './pages/bo-invoice-details/bo-invoice-details.component';
+import { BoInvoiceComponent } from './pages/bo-invoice/bo-invoice.component';
 const routes: Routes = [
   { path: "", redirectTo: 'login', pathMatch: 'full' },
   { path: "login", component: LoginSigninComponent },
@@ -21,6 +27,16 @@ const routes: Routes = [
       { path: "cars-invoice", component: CarInvoiceComponent },
       { path: "cars-invoice-details/:id", component: CarInvoiceDetailsComponent },
       { path: "home", component: HomeComponent },
+    ]
+  },
+  {
+    path: "Bo", component: BoTemplateComponent,
+    children: [
+      { path: "depot", component: BoDepotComponent },
+      { path: "depot-details/:id", component: BoCarDepotDetailComponent },
+      { path: "progression", component: BoCarProgressionComponent },
+      { path: "cars-invoice-details/:id", component: BoInvoiceDetailsComponent },
+      { path: "cars-invoice", component: BoInvoiceComponent }
     ]
   },
   { path: "**", component: ErrorpageComponent }
