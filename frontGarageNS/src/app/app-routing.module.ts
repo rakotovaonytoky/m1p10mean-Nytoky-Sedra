@@ -19,7 +19,7 @@ const routes: Routes = [
       { path: "cars-deposit", component: CarDepositComponent },
       { path: "cars-reparation", component: CarRepairProgressionComponent },
       { path: "cars-invoice", component: CarInvoiceComponent },
-      { path: "cars-invoice-details", component: CarInvoiceDetailsComponent },
+      { path: "cars-invoice-details/:id", component: CarInvoiceDetailsComponent },
       { path: "home", component: HomeComponent },
     ]
   },

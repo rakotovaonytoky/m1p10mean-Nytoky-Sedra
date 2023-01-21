@@ -42,7 +42,7 @@ import { BoCarProgressionComponent } from './pages/bo-car-progression/bo-car-pro
     CarTypeColorComponent,
     SliderComponent,
     CarCardProgressComponent,
-    BoCarProgressionComponent,
+    BoCarProgressionComponent
   ],
   imports: [
     BrowserModule,

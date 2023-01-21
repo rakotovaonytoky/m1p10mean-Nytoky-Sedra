@@ -1,1 +1,64 @@
-<p>car-invoice-details works!</p>
+<app-slider></app-slider>
+<div class="page-content container">
+    <div class="page-header text-blue-d2">
+        <h1 class="page-title text-secondary-d1 fw-bold">
+            Facture
+            <small class="page-info">
+                <i class="fa fa-angle-double-right text-80"></i>
+                ID: #111-222
+            </small>
+        </h1>
+    </div>
+
+    <div class="container px-0">
+        <div class="row mt-4">
+            <div class="col-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div> 
+                                    <p class="h4">
+                                        <span class="align-middle">Voiture:</span>
+                                        <span class="text-600 text-110 text-blue align-middle"> 4444 TBN</span>
+                                    </p>
+                                </div>
+                                <div> 
+                                    <p class="h4">
+                                        <span class="align-middle">Date fin réparation:</span>
+                                        <span class="text-600 text-110 text-blue align-middle"> </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+               
+        </div>
+        </div>
+        <div class="container mb-3">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+                        <ng-container matColumnDef="item">
+                            <th mat-header-cell *matHeaderCellDef> Réparation </th>
+                            <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+                            <td mat-footer-cell *matFooterCellDef>
+                                <p class="text-muted fw-bold">Total</p> </td>
+                        </ng-container>
+                        <ng-container matColumnDef="cost">
+                            <th mat-header-cell *matHeaderCellDef> Coût </th>
+                            <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+                            <td mat-footer-cell *matFooterCellDef> 
+                                <p class="text-muted fw-bold">{{getTotalCost() | currency}}</p>
+                                 </td>
+                        </ng-container>
+                
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-end mt-3">
+                    <button mat-raised-button color="custom-primary" (click)="checkout()">Payer</button>
+                </div>
+            </div>
+        </div>
+</div>
