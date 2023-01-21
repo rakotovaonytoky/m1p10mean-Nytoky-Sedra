@@ -3,8 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const User = require('./models/user');
 const cors = require('cors');
-
-
+const Car = require('./models/car');
 //demande an'ilay moongose sinon misy error
  mongoose.set('strictQuery', true);
 
@@ -79,8 +78,9 @@ app.use(cors());
          res.status(400).json(error)});
     });
 
+  
 
-
+   
    //api login , migerer hoe valide ve ilay mail, ensuite hoe true ve mdp, mireturn données users izyy 
   app.post('/api/login', async (req,res,next) =>{
     try{
@@ -96,5 +96,24 @@ app.use(cors());
     }
   });
 
+  
+const addCar= (req,res ) =>{
+  console.log({...req.body}); 
+  delete req.body._id;  
+  const car =new Car( {
+    ...req.body
+   });
+   car.save()
+      .then(() =>{
+        console.log('[INFO] voiture Enregistré');
+        res.status(201).json(car.matricule)
+      })
+    .catch((error) => {
+      // catch uniquekey for Mail
+        errMsg = error.message;
+        res.status(400).json(error);
+      }); 
+    }
+app.post('/api/car',(req,res,next)=>{addCar(req,res)});
 
 module.exports = app;
