@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = require('./models/user');
 const cors = require('cors');
 const Car = require('./models/car');
+const TypeReparation = require('./models/typeReparation');
 //demande an'ilay moongose sinon misy error
  mongoose.set('strictQuery', true);
 
@@ -115,5 +116,25 @@ const addCar= (req,res ) =>{
       }); 
     }
 app.post('/api/car',(req,res,next)=>{addCar(req,res)});
+
+
+const addTypeReparation= (req,res ) =>{
+  console.log({...req.body}); 
+  delete req.body._id;  
+  const typeReparation =new TypeReparation( {
+    ...req.body
+   });
+   typeReparation.save()
+      .then(() =>{
+        console.log('[INFO] voiture Enregistré');
+        res.status(201).json(typeReparation)
+      })
+    .catch((error) => {
+      // catch uniquekey for Mail
+        errMsg = error.message;
+        res.status(400).json(error);
+      }); 
+    }
+app.post('/api/suggestRepairs',(req,res,next)=>{addTypeReparation(req,res)});
 
 module.exports = app;
