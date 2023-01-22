@@ -6,6 +6,8 @@ import { Observable, TimeoutError, throwError, catchError, map, timeout, finaliz
 import { AuthService } from '../auth/auth.service';
 import { LoaderService } from '../loader/loader.service';
 
+
+const TOKEN_HEADER_KEY = 'x-access-token';
 const APP_XHR_TIMEOUT = 7000;
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,7 @@ export class AppinterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.totalrequest++;
+    this.handleRequest(req);
     return next
       .handle(req)
       .pipe(
@@ -32,24 +35,19 @@ export class AppinterceptorService implements HttpInterceptor {
       );
   }
 
-
+  handleRequest(req: HttpRequest<any>) {
+    const token = this.autthservice.getToken();
+    if (token != null) {
+      req = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, token) });
+    }
+  }
 
 
   private handleSuccessfulResponse(event: any): HttpResponse<any> {
     // console.log('response at interceptor', event);
 
     this.loaderService.isLoading.next(true);
-    // if (event instanceof HttpResponse) {
-    //   event = event.clone({ body: event.body.response });
-    // }
 
-    // const token = this.appService.getAuthToken();
-
-    // return request.clone({
-    //   setHeaders: {
-    //     Authorization: `Basic ${token}`
-    //   }
-    // })
     return event;
   }
 
@@ -65,8 +63,7 @@ export class AppinterceptorService implements HttpInterceptor {
     switch (errorResponse.status) {
       case 401:
 
-        printerror = 'Mot de passe ou identifiant invalide';
-        this.token.signOut();
+        this.logout();
         break;
       case 503: // Service Unavailable
 
