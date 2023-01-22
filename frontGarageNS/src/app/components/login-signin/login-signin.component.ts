@@ -4,6 +4,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/classes/custom-validator';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-login-signin',
@@ -15,9 +16,11 @@ export class LoginSigninComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private route: Router,
-    public elRef: ElementRef) {
+    public elRef: ElementRef,
+    private authService: AuthService) {
 
   }
+  private roles: string[] = [];
   sign_in_btn: any;
   cont: any;
   button = 'Se connecter';
@@ -80,7 +83,7 @@ export class LoginSigninComponent implements OnInit {
       next: (user: any) => {
         this.registerSuccessMessage = "Compte créé avec succès";
         this.registerLoader(false, 'Créer');
-        alert("success");
+        // alert("success");
       }, error: (error: any) => {
         console.log(error);
 
@@ -110,8 +113,17 @@ export class LoginSigninComponent implements OnInit {
     }
     this.loginService.loginUser(this.userLogin.get('email')?.value, this.userLogin.get('motDePasse')?.value).subscribe({
       next: (user: any) => {
+        this.authService.saveToken(user.accessToken);
+        const foundedUser = { id: user.id, email: user.email, name: user.name, roles: user.roles };
+        this.authService.saveUser(foundedUser);
+        this.roles = user.roles;
+        if (this.roles.includes('ROLE_USER')) {
 
-        this.route.navigate(['/template/home']);
+          this.route.navigate(['/template/your-cars']);
+        } else if (this.roles.includes('ROLE_MODERATOR') || this.roles.includes('ROLE_ADMIN')) {
+
+          this.route.navigate(['/Bo/depot']);
+        }
       }, error: (error: any) => {
         console.log(error);
 

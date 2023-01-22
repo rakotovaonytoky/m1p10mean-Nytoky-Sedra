@@ -151,6 +151,7 @@ router.post('/login', async (req, res) => {
         id: user._id,
         email: user.email,
         roles: authorities,
+        name:user.name,
         accessToken: token
       });
     });
