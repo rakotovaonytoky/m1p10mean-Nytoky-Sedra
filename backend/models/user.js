@@ -30,7 +30,13 @@ const userSchema = mongoose.Schema(
              confirmPassword:{
                  type:String,
                  required:true
-            },
+        },
+             roles: [
+            {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Role"
+            }
+        ]
 
          }
 );
