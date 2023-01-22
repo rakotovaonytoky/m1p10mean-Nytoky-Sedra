@@ -1,7 +1,7 @@
 import { RegisterDto } from './../../classes/register-dto';
 import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 const API_URL = environment.baseUrl;
 @Injectable({
@@ -9,7 +9,10 @@ const API_URL = environment.baseUrl;
 })
 export class LoginService {
 
-  constructor(private httpclient: HttpClient) { }
+  private httpclient!: HttpClient
+  constructor(private handler: HttpBackend) {
+    this.httpclient = new HttpClient(handler);
+  }
 
 
   loginUser(emaill: any, passwordd: any): Observable<any> {

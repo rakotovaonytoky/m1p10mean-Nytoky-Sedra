@@ -1,5 +1,5 @@
 import { MaterialModule } from './material/material.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -29,6 +29,9 @@ import { BoHeaderComponent } from './components/bo-header/bo-header.component';
 import { BoCarDepotDetailComponent } from './pages/bo-car-depot-detail/bo-car-depot-detail.component';
 import { BoInvoiceDetailsComponent } from './pages/bo-invoice-details/bo-invoice-details.component';
 import { BoInvoiceComponent } from './pages/bo-invoice/bo-invoice.component';
+import { GlobalLoaderComponent } from './components/global-loader/global-loader.component';
+import { LoaderService } from './service/loader/loader.service';
+import { AppinterceptorService } from './service/interceptor/appinterceptor.service';
 
 
 @NgModule({
@@ -56,6 +59,7 @@ import { BoInvoiceComponent } from './pages/bo-invoice/bo-invoice.component';
     BoCarDepotDetailComponent,
     BoInvoiceDetailsComponent,
     BoInvoiceComponent,
+    GlobalLoaderComponent,
 
   ],
   imports: [
@@ -66,7 +70,9 @@ import { BoInvoiceComponent } from './pages/bo-invoice/bo-invoice.component';
     BrowserAnimationsModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: AppinterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
