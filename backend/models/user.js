@@ -63,10 +63,10 @@ userSchema.statics.checkUser = async(userData, password) =>{
 }
 
 
-userSchema.pre('save', async function(){
+userSchema.pre('save',function(){
     console.log('[INFO] CRYPTAGE MotDePasse');
-    if(this.isModified('password')) this.password = await bcrypt.hash(this.password,8);
-    if(this.isModified('confirmPassword')) this.confirmPassword = await bcrypt.hash(this.confirmPassword,8);
+    if(this.isModified('password')) this.password =  bcrypt.hashSync(this.password,8);
+    if(this.isModified('confirmPassword')) this.confirmPassword =  bcrypt.hashSync(this.confirmPassword,8);
     console.log('[INFO] cryptage réussi');
     return 0;
 });

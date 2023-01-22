@@ -110,10 +110,10 @@ module.exports = function (app) {
   });
 
      //api login , migerer hoe valide ve ilay mail, ensuite hoe true ve mdp, mireturn données users izyy 
-  router.post('/login', async (req,res) =>{
+router.post('/login', async (req, res) => {
     try{
         User.findOne({
-    username: req.body.email
+    email: req.body.email
   })
     .populate("roles", "-__v")
     .exec((err, user) => {
@@ -123,7 +123,7 @@ module.exports = function (app) {
       }
 
       if (!user) {
-        return res.status(404).send({ message: "User Not found." });
+        return res.status(404).send({ message: "Email introuvable." });
       }
 
       var passwordIsValid = bcrypt.compareSync(
@@ -134,7 +134,7 @@ module.exports = function (app) {
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
-          message: "Invalid Password!"
+          message: "Email ou mot de passe erronée !"
         });
       }
 
