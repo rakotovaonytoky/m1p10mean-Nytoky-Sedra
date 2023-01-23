@@ -26,3 +26,16 @@ exports.getTypeCar= (req,res ) =>{
         res.status(400).json({ message : errMsg});
       }); 
 }
+
+
+
+exports.getCarByUser=(res,idUser) =>{
+  Car.find({"user._id":idUser},{"_id":0})
+  .then(cars => {
+    console.log('[INFO] affichage reussi');
+    res.status(200).json(cars)})
+.catch(error =>{
+    console.log('[INFO] erreur d affichage');
+     res.status(400).json(error)
+    });
+}

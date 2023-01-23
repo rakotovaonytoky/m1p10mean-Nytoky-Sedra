@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 // function isEmail(email) { 
 //     var regEmail = new RegExp('^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$','i');
@@ -10,6 +11,7 @@ const validator = require('validator');
 //midefinir type de données ao @N'ILAY user
 const userSchema = mongoose.Schema(
          {
+            _id: Number,
              name:{
                  type:String,
                  required: true
@@ -38,9 +40,10 @@ const userSchema = mongoose.Schema(
             }
         ]
 
-         }
+         },{_id:false}
 );
 
+userSchema.plugin(AutoIncrement);
 //micheck hoe mi-existe ve ilay mail, ary true ve ilay mdp
 userSchema.statics.checkUser = async(userData, password) =>{
     if(!userData) {
