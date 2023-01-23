@@ -29,8 +29,8 @@ exports.getTypeCar= (req,res ) =>{
 
 
 
-exports.getCarByUser=(res,idUser) =>{
-  Car.find({"user._id":idUser},{"_id":0})
+exports.getCarByUser=(req,res) =>{
+  Car.find({"user._id":req.params.idUser},{"_id":0})
   .then(cars => {
     console.log('[INFO] affichage reussi');
     res.status(200).json(cars)})
