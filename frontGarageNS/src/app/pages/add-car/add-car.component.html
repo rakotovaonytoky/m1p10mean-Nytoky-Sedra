@@ -34,7 +34,7 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>Type de vehicule</mat-label>
                                 <mat-select formControlName="vType" >
-                                    <mat-option *ngFor="let type of typeCars$| async" value="{{type.idType}}">{{type.value}}</mat-option>
+                                    <mat-option *ngFor="let type of typeCars$;let index=index" value="{{type._id}}">{{type.values}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                           </div>
@@ -54,7 +54,7 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>Marque</mat-label>
                                 <mat-select formControlName="brand">
-                                    <mat-option *ngFor="let model of modelCars$| async" value="{{model.idType}}">{{model.value}}</mat-option>
+                                    <mat-option *ngFor="let model of modelCars$" value="{{model._id}}">{{model.values}}</mat-option>
                                     
                                    
                                 </mat-select>

@@ -6,6 +6,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+import { GlobalService } from 'src/app/service/globalService/global.service';
+import { TypeObject } from 'src/app/classes-v2/type-object';
 @Component({
   selector: 'app-add-car',
   templateUrl: './add-car.component.html',
@@ -15,11 +17,12 @@ export class AddCarComponent implements OnInit {
 
 
   constructor(private _formBuilder: FormBuilder,
-    private snackBarService: SnackbarService) { }
+    private snackBarService: SnackbarService,
+    private globalService: GlobalService) { }
 
   ToInsert!: Car;
-  typeCars$!: Observable<Typevalue[]>;
-  modelCars$!: Observable<Typevalue[]>;
+  typeCars$!: any;
+  modelCars$!: any;
   car!: Car;
 
   firstFormGroup = this._formBuilder.group({
@@ -66,28 +69,41 @@ export class AddCarComponent implements OnInit {
   }
 
   getCarType() {
-    this.typeCars$ = of([
-      { idType: 1, value: "Micro" },
-      { idType: 2, value: "Légère" },
-      { idType: 3, value: "4x4" },
-      { idType: 4, value: "SUV" },
-      { idType: 5, value: "Camionette" },
-      { idType: 6, value: "Camion" },
-    ])
+
+
+    this.globalService.getTypeCar().subscribe({
+      next: (carType: any) => {
+        this.typeCars$ = Array.from(Object.values(carType))[0];
+        console.log("", this.typeCars$);
+      },
+      error: (error: any) => {
+        console.log("cartypeerror:", error);
+      }
+    });
 
   }
   getCarModel() {
-    this.modelCars$ = of([
-      { idType: 1, value: "TOYOTA" },
-      { idType: 2, value: "MAZDA" },
-      { idType: 2, value: "WOLKSWAGEN" },
-    ])
+
+    this.globalService.getMarkCar().subscribe({
+      next: (carMark: TypeObject[]) => {
+        this.modelCars$ = Array.from(Object.values(carMark))[0];
+      }, error: (error: any) => {
+        console.log("car mark", error);
+      }
+    })
+
   }
 
   callSnackService() {
     this.snackBarService.openSnackBar(
       'Voiture ajoutée',
       'Okey', 'center', 'top', ['green-snackbar', 'login-snackbar']);
+  }
+
+  callSnackServiceError() {
+    this.snackBarService.openSnackBar(
+      'Voiture ajoutée',
+      'Okey', 'center', 'top', ['red-snackbar']);
   }
 
 

@@ -1,6 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { read } from 'fs';
 import { request } from 'http';
 import { Observable, TimeoutError, throwError, catchError, map, timeout, finalize } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -9,9 +10,7 @@ import { LoaderService } from '../loader/loader.service';
 
 const TOKEN_HEADER_KEY = 'x-access-token';
 const APP_XHR_TIMEOUT = 7000;
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AppinterceptorService implements HttpInterceptor {
   token: any;
 
@@ -37,9 +36,14 @@ export class AppinterceptorService implements HttpInterceptor {
 
   handleRequest(req: HttpRequest<any>) {
     const token = this.autthservice.getToken();
+    req = req.clone({
+      withCredentials: true,
+    });
+    // console.log("", token);
     if (token != null) {
       req = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, token) });
     }
+    console.log("", req);
   }
 
 

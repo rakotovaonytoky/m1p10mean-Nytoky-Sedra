@@ -3,6 +3,18 @@ var router = express.Router();
 const Car = require('../models/car');
 const TypeReparation = require('../models/typeReparation');
 const CarController=require("../controller/car.controller")
+const { authJwt } = require("../middlewares/"); 
+
+
+module.exports = function (app) {
+  app.use(function (req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+  });
+}
 
 const addCar= (req,res) =>{
   console.log({...req.body}); 
@@ -27,6 +39,8 @@ router.post('/car',(req,res)=>{addCar(req,res)});
 
 const addTypeReparation= (req,res ) =>{
   delete req.body._id;  
+const { authJwt } = require("../middlewares"); 
+
   const typeReparation =new TypeReparation( {
     ...req.body
    });
@@ -55,8 +69,8 @@ router.get('/suggestRepairs', (req, res) => {
      res.status(400).json(error)});
 });
 
-router.get("/typecar", CarController.getTypeCar);
+router.get("/markcar",[authJwt.verifyToken] ,CarController.getmarkCar);
+router.get("/typecar",[authJwt.verifyToken], CarController.getTypeCar);
 
-router.get("/markcar", CarController.getmarkCar);
 
 module.exports = router;

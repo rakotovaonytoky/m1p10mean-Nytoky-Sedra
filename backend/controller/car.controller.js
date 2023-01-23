@@ -3,7 +3,7 @@ const TypeCar=require("../models/typeCar");
 // const car=car.
 
 exports.getmarkCar= (req,res ) =>{
-  MarkCar.find({},{"reference":1,"values":1,"_id":0})
+  MarkCar.find()
       .then((markCar) =>{
        
           return res.status(200).json({ markCar });
@@ -15,7 +15,7 @@ exports.getmarkCar= (req,res ) =>{
       }); 
 }
 exports.getTypeCar= (req,res ) =>{
-  TypeCar.find({},{"reference":1,"values":1,"_id":0})
+  TypeCar.find()
       .then((typeCar) =>{
        
           return res.status(200).json({ typeCar });
@@ -26,6 +26,9 @@ exports.getTypeCar= (req,res ) =>{
         res.status(400).json({ message : errMsg});
       }); 
 }
+exports.addCarTest = (req, res) => {
+  
+};
 
 
 
