@@ -3,13 +3,9 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const depotCarSchema = mongoose.Schema(
     {
         _id: Number,
-        idUser:  {
-            type: String,
-            default: 0
-        },
-        idCar:   {
-            type: String,
-            default: 0
+        idCar:   {           
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Car"
         },
         etat:  {
             type: Number,
@@ -17,6 +13,5 @@ const depotCarSchema = mongoose.Schema(
         }
     },{_id:false}
 );
- 
 depotCarSchema.plugin(AutoIncrement);
 module.exports= mongoose.model('depotCar',depotCarSchema);

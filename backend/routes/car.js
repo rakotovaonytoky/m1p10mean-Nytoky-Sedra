@@ -3,25 +3,55 @@ var router = express.Router();
 const Car = require('../models/car');
 const TypeReparation = require('../models/typeReparation');
 const CarController=require("../controller/car.controller")
+const TypeCar=require("../models/typeCar");
+const MarkCar=require("../models/markCar");
 
 const addCar= (req,res) =>{
   console.log({...req.body}); 
-  delete req.body._id;  
+  delete req.body._id;
+  TypeCar.find({"reference":req.body.typeCar},{"reference":0,"values":1,"_id":0})
+  .then(typeCars => {
+    console.log('[INFO] affichage reussi');
+    res.status(200).json(typeCars)})
+.catch(error =>{
+    console.log('[INFO] erreur d affichage');
+     res.status(400).json(error)});   
+  MarkCar.find({"reference":req.body.markCar},{"reference":0,"values":1,"_id":0})
+      .then((markCars) =>{
+        console.log('[INFO] affichage reussi');
+        res.status(200).json(markCars)})
+    .catch(error =>{
+        console.log('[INFO] erreur d affichage');
+         res.status(400).json(error)});
   const car =new Car( {
-    ...req.body
+    typeCar:{
+      reference: req.body.typeCar,
+      values:1//à completer
+    },
+    colorCar:req.body.colorCar,
+    markCar:{
+      reference: req.body.typeCar,
+      values:1//à completer
+     },
+    modelCar:req.body.modelCar,
+    matricule: req.body.matricule,
+    proprietaire: req.body.proprietaire,
+    anneDeSortie:req.body.anneDeSortie,
+    idUser : req.body.idUser
    });
+   console.log('vitako objet');
+   
    car.save()
       .then(() =>{
         console.log('[INFO] voiture Enregistré');
-        res.status(201).json(car.matricule)
+        res.json(car.matricule)
       })
     .catch((error) => {
       // catch uniquekey for Mail
         errMsg = error.message;
-        res.status(400).json(error);
-      }); 
-}
-    
+        res.json(error);
+      });     
+    }
 router.post('/car',(req,res)=>{addCar(req,res)});
 
 
