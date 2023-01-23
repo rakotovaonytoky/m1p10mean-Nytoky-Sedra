@@ -1,29 +1,8 @@
 const mongoose = require('mongoose');
-//midefinir type de données ao @N'ILAY user
-const typeCarSchema = mongoose.Schema(
-    {
-        reference:{
-            type:Number,
-            required:true
-        },
-        values: {
-            type:String,
-            required:true 
-        },
-    }
-);
-const markCarSchema = mongoose.Schema(
-    {
-        reference:{
-            type:Number,
-            required:true
-        },
-        values : {
-            type:String,
-            required:true 
-        },
-    }
-);
+const typeCarSchema = require('./typeCar').schema;
+const markCarSchema = require('./markCar').schema;
+
+
 
 const carSchema = mongoose.Schema(
          {
@@ -48,4 +27,5 @@ const carSchema = mongoose.Schema(
              },
             }
 );
-module.exports= mongoose.model('Car',carSchema);
+module.exports= mongoose.model('Car',carSchema)
+
