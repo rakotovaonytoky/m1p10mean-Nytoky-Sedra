@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Car = require('../models/car');
 const TypeReparation = require('../models/typeReparation');
+const CarController=require("../controller/car.controller")
 
 const addCar= (req,res) =>{
   console.log({...req.body}); 
@@ -53,4 +54,9 @@ router.get('/suggestRepairs', (req, res) => {
     console.log('[INFO] erreur d affichage');
      res.status(400).json(error)});
 });
+
+router.get("/typecar", CarController.getTypeCar);
+
+router.get("/markcar", CarController.getmarkCar);
+
 module.exports = router;

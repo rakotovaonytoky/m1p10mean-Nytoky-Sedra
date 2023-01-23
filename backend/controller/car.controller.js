@@ -18,7 +18,7 @@ exports.getTypeCar= (req,res ) =>{
   TypeCar.find({},{"reference":1,"values":1,"_id":0})
       .then((typeCar) =>{
        
-          return res.status(200).json({ marktypeCarCar });
+          return res.status(200).json({ typeCar });
       })    
     .catch((error) => {
       // catch uniquekey for Mail
