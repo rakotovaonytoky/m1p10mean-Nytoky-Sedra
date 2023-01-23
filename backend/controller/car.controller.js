@@ -1,20 +1,28 @@
-const car = require("../models");
+const MarkCar = require("../models/markCar");
+const TypeCar=require("../models/typeCar");
 // const car=car.
 
-// exports.getTypeCar= (req,res ) =>{
-//   delete req.body._id;  
-//   const typeReparation =new TypeReparation( {
-//     ...req.body
-//    });
-//    console.log({...req.body}); 
-//    typeReparation.save()
-//       .then(() =>{
-//         console.log('[INFO] voiture Enregistré');
-//         res.status(201).json(typeReparation)
-//       })
-//     .catch((error) => {
-//       // catch uniquekey for Mail
-//         errMsg = error.message;
-//         res.status(400).json(error);
-//       }); 
-//     }
+exports.getmarkCar= (req,res ) =>{
+  MarkCar.find({},{"reference":1,"values":1,"_id":0})
+      .then((markCar) =>{
+       
+          return res.status(200).json({ markCar });
+      })
+    .catch((error) => {
+      // catch uniquekey for Mail
+        errMsg = error.message;
+        res.status(400).json({ message : errMsg});
+      }); 
+}
+exports.getTypeCar= (req,res ) =>{
+  TypeCar.find({},{"reference":1,"values":1,"_id":0})
+      .then((typeCar) =>{
+       
+          return res.status(200).json({ marktypeCarCar });
+      })    
+    .catch((error) => {
+      // catch uniquekey for Mail
+        errMsg = error.message;
+        res.status(400).json({ message : errMsg});
+      }); 
+}
