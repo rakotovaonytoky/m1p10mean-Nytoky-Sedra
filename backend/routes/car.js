@@ -6,7 +6,7 @@ const CarController=require("../controller/car.controller")
 const { authJwt } = require("../middlewares/"); 
 const TypeCar=require("../models/typeCar");
 const MarkCar=require("../models/markCar");
-
+const Depot=require("../models/Depot");
 module.exports = function (app) {
   app.use(function (req, res, next) {
     res.header(
@@ -83,6 +83,44 @@ const { authJwt } = require("../middlewares");
         res.status(400).json(error);
       }); 
     }
+
+
+    const DoDepot= (req,res ) =>{ 
+      const depot =new  Depot( {
+        ...req.body
+       });
+       console.log({depot}); 
+       depot.save()
+          .then(() =>{
+            console.log('[INFO] voiture deposé!');
+            const thecar = Car.findOne({ "_id": req.body.idCar });
+      
+            thecar.then((car) => {
+              //console.log("car:tyh", car);
+                 hisCar = car;
+                  hisCar.etat=1;
+            hisCar.save() 
+            .then(() =>{
+              console.log('[INFO] etatCar set to 1');
+              res.status(400).json(hisCar.matricule);
+            })
+          .catch((error) => {
+            // catch uniquekey for Mail
+              errMsg = error.message;
+              res.status(400).json(error);
+            }); 
+          })
+        .catch((error) => {
+          // catch uniquekey for Mail
+            errMsg = error.message;
+            res.status(400).json(error);
+          }); 
+        }) .catch((error) => {
+          // catch uniquekey for Mail
+            errMsg = error.message;
+            res.status(400).json(error)});
+        }
+
  router.post('/AddsuggestRepairs',(req,res)=>{addTypeReparation(req,res)});
 
 router.get('/suggestRepairs', (req, res) => {
@@ -98,6 +136,14 @@ router.get('/suggestRepairs', (req, res) => {
 
 router.get("/markcar",[authJwt.verifyToken] ,CarController.getmarkCar);
 router.get("/typecar",[authJwt.verifyToken], CarController.getTypeCar);
+
+
+router.post("/carDepot",DoDepot);
+
+
+
+
+
 
 
 module.exports = router;
