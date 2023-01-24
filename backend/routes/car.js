@@ -25,11 +25,8 @@ const addCar= (req,res) =>{
         anneDeSortie: req.body.anneDeSortie,
         idUser: req.body.idUser
       });
-      delete car.__v;
       // delete car.TypeCar._id;
       // delete car.MarkCar._id;
-      delete car._id;
-
       car.save()
       .then(() =>{
         console.log('[INFO] voiture Enregistré');
