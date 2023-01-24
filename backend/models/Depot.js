@@ -9,13 +9,25 @@ const depotCarSchema = mongoose.Schema(
         },
         etat:  {
             type: Number,
-            default: 0
+            default: 1
         },
         date: {
             type:Date,
             required: true,
             default:new Date()
         },
+        description: {
+            type: String,
+            default: ""
+        },
+        idtypeReparation: [{
+            reference: {
+                type: Number,
+            },
+            values: {
+                type: String,
+            }
+        }]
     },
     // {_id:false}
 );
