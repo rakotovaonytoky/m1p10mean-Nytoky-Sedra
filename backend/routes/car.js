@@ -43,14 +43,14 @@ const addCar= (req,res) =>{
       car.save()
       .then(() =>{
         console.log('[INFO] voiture Enregistré');
-        res.json(car.matricule)
+        res.status(201).json({car})
       })
     .catch((error) => {
       // catch uniquekey for Mail
       
       console.log('[INFO] voiture non enregistré');
         errMsg = error.message;
-        res.json({errMsg});
+        res.status(500).json({errMsg});
       });     
      // return res.json(car);
       
@@ -98,6 +98,6 @@ router.get('/suggestRepairs', (req, res) => {
 
 router.get("/markcar",[authJwt.verifyToken] ,CarController.getmarkCar);
 router.get("/typecar",[authJwt.verifyToken], CarController.getTypeCar);
-
+router.get("/:idUser/cars", CarController.getCarByUser);
 
 module.exports = router;

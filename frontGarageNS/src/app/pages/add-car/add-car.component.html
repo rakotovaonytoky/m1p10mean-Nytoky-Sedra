@@ -34,7 +34,7 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>Type de vehicule</mat-label>
                                 <mat-select formControlName="vType" >
-                                    <mat-option *ngFor="let type of typeCars$;let index=index" value="{{type._id}}">{{type.values}}</mat-option>
+                                    <mat-option *ngFor="let type of typeCars$;let index=index" value="{{type.reference}}">{{type.values}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                           </div>
@@ -54,7 +54,7 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>Marque</mat-label>
                                 <mat-select formControlName="brand">
-                                    <mat-option *ngFor="let model of modelCars$" value="{{model._id}}">{{model.values}}</mat-option>
+                                    <mat-option *ngFor="let model of modelCars$" value="{{model.reference}}">{{model.values}}</mat-option>
                                     
                                    
                                 </mat-select>
@@ -109,27 +109,9 @@
         <h2 class="h2 text-center">Vos voitures</h2>
        
             <div class="col-lg-12">
-            <app-car-card 
-            [vColor]="'grey'"
-            [vType]="1"
-            [brand]="'WOLWSAGEN'"
-            [model]="'POLO 4'"
-            [licensePlate]="'4444 TBN'"
-            ></app-car-card> 
-            <app-car-card 
-            [vColor]="'red'"
-            [vType]="2"
-            [brand]="'WOLWSAGEN'"
-            [model]="'POLO 4'"
-            [licensePlate]="'4444 TBN'"
-            ></app-car-card> 
-            <app-car-card 
-            [vColor]="'#B04C37'"
-            [vType]="6"
-            [brand]="'WOLWSAGEN'"
-            [model]="'POLO 4'"
-            [licensePlate]="'4444 TBN'"
-            ></app-car-card> 
+        <app-car-card *ngFor="let car of listCar" [vColor]="car.colorCar" [vType]="car.markCar[0].reference"
+            [brand]="car.markCar[0].values" [model]="car.modelCar" [licensePlate]="car.matricule">
+        </app-car-card>
             </div>
     </div>
 </div>

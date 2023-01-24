@@ -1,5 +1,6 @@
 const MarkCar = require("../models/markCar");
-const TypeCar=require("../models/typeCar");
+const TypeCar = require("../models/typeCar");
+const Car=require("../models/car");
 // const car=car.
 
 exports.getmarkCar= (req,res ) =>{
@@ -33,12 +34,12 @@ exports.addCarTest = (req, res) => {
 
 
 exports.getCarByUser=(req,res) =>{
-  Car.find({"user._id":req.params.idUser},{"_id":0})
+  Car.find({"idUser":req.params.idUser},{"__v":0})
   .then(cars => {
     console.log('[INFO] affichage reussi');
     res.status(200).json(cars)})
 .catch(error =>{
     console.log('[INFO] erreur d affichage');
-     res.status(400).json(error)
+     res.status(500).json({message:error.message})
     });
 }
