@@ -9,34 +9,48 @@ const MarkCar=require("../models/markCar");
 const addCar= (req,res) =>{
   console.log({...req.body}); 
   delete req.body._id;
-  const vartypeCar = TypeCar.findOne({"reference":req.body.typeCar},{"reference":0,"values":1,"_id":0});
-  const varmarkCar = MarkCar.find({"reference":req.body.markCar},{"reference":0,"values":1,"_id":0});
-  const car =new Car( {
-    typeCar:new TypeCar({...vartypeCar}),
-    colorCar:req.body.colorCar,
-    markCar:new MarkCar({varmarkCar}),
-    modelCar:req.body.modelCar,
-    matricule: req.body.matricule,
-    proprietaire: req.body.proprietaire,
-    anneDeSortie:req.body.anneDeSortie,
-    idUser : req.body.idUser
-    });
-  //  car.typeCar.push(vartypeCar.values);
-   
-   console.log('vitako carcarcar'+vartypeCar.values);
-   console.log('vitako objet'+car);
-   
-   car.save()
+  const vartypeCar = TypeCar.findOne({ "reference": req.body.typeCar });
+  const varmarkCar = MarkCar.find({ "reference": req.body.markCar });
+  vartypeCar.then((typeCarResponse) => {
+    console.log("typecar:tyh", typeCarResponse);
+    varmarkCar.then((markCarResult) => {
+      console.log("typecar:tyh", markCarResult);  
+      const car = new Car({
+        typeCar: typeCarResponse,
+        colorCar: req.body.colorCar,
+        markCar: markCarResult,
+        modelCar: req.body.modelCar,
+        matricule: req.body.matricule,
+        proprietaire: req.body.proprietaire,
+        anneDeSortie: req.body.anneDeSortie,
+        idUser: req.body.idUser
+      });
+      delete car.__v;
+      // delete car.TypeCar._id;
+      // delete car.MarkCar._id;
+      delete car._id;
+
+      car.save()
       .then(() =>{
         console.log('[INFO] voiture Enregistré');
         res.json(car.matricule)
       })
     .catch((error) => {
       // catch uniquekey for Mail
+      
+      console.log('[INFO] voiture non enregistré');
         errMsg = error.message;
-        res.json(error);
+        res.json({errMsg});
       });     
-    }
+     // return res.json(car);
+      
+    })
+    .catch((err) => {  res.status(404).json({message: err.message});})
+
+  }).catch((err) => {res.status(405).json({message: err.message});})
+  console.log("errrrrooooor");
+}
+
 router.post('/car',(req,res)=>{addCar(req,res)});
 
 
