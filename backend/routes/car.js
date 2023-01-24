@@ -27,6 +27,7 @@ const addCar= (req,res) =>{
     console.log("typecar:tyh", typeCarResponse);
     varmarkCar.then((markCarResult) => {
       console.log("typecar:tyh", markCarResult);  
+      // const objectId = ObjectId(req.body.idUser);
       const car = new Car({
         typeCar: typeCarResponse,
         colorCar: req.body.colorCar,
@@ -35,7 +36,7 @@ const addCar= (req,res) =>{
         matricule: req.body.matricule,
         proprietaire: req.body.proprietaire,
         anneDeSortie: req.body.anneDeSortie,
-        idUser: req.body.idUser
+        idUser: req.body.idUser  
       });
       // delete car.TypeCar._id;
       // delete car.MarkCar._id;

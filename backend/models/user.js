@@ -11,7 +11,6 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 //midefinir type de données ao @N'ILAY user
 const userSchema = mongoose.Schema(
          {
-            _id: Number,
              name:{
                  type:String,
                  required: true
@@ -40,10 +39,10 @@ const userSchema = mongoose.Schema(
             }
         ]
 
-         },{_id:false}
+         }
 );
 
-userSchema.plugin(AutoIncrement);
+
 //micheck hoe mi-existe ve ilay mail, ary true ve ilay mdp
 userSchema.statics.checkUser = async(userData, password) =>{
     if(!userData) {
