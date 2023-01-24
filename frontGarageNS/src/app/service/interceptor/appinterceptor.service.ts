@@ -23,9 +23,11 @@ export class AppinterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.totalrequest++;
-    this.handleRequest(req);
+    const token = this.autthservice.getToken();
+    const headers = req.headers.set(TOKEN_HEADER_KEY, token);
+
     return next
-      .handle(req)
+      .handle(req.clone({ headers }))
       .pipe(
         timeout(APP_XHR_TIMEOUT),
         map((res) => this.handleSuccessfulResponse(res)),
@@ -35,14 +37,7 @@ export class AppinterceptorService implements HttpInterceptor {
   }
 
   handleRequest(req: HttpRequest<any>) {
-    const token = this.autthservice.getToken();
-    req = req.clone({
-      withCredentials: true,
-    });
-    // console.log("", token);
-    if (token != null) {
-      req = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, token) });
-    }
+
     console.log("", req);
   }
 

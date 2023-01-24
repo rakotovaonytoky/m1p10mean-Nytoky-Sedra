@@ -17,7 +17,7 @@ export class AuthService {
     window.localStorage.setItem(TOKEN_KEY, token);
   }
 
-  public getToken(): string | null {
+  public getToken(): any {
     return window.localStorage.getItem(TOKEN_KEY);
   }
 
