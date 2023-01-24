@@ -9,37 +9,28 @@ const MarkCar=require("../models/markCar");
 const addCar= (req,res) =>{
   console.log({...req.body}); 
   delete req.body._id;
-  TypeCar.find({"reference":req.body.typeCar},{"reference":0,"values":1,"_id":0})
-  .then(typeCars => {
-    console.log('[INFO] affichage reussi');
-    res.status(200).json(typeCars)})
-.catch(error =>{
-    console.log('[INFO] erreur d affichage');
-     res.status(400).json(error)});   
-  MarkCar.find({"reference":req.body.markCar},{"reference":0,"values":1,"_id":0})
-      .then((markCars) =>{
-        console.log('[INFO] affichage reussi');
-        res.status(200).json(markCars)})
-    .catch(error =>{
-        console.log('[INFO] erreur d affichage');
-         res.status(400).json(error)});
+  const vartypeCar = TypeCar.findOne({"reference":req.body.typeCar});
+  const varmarkCar = MarkCar.find({"reference":req.body.markCar},{"reference":0,"values":1,"_id":0});
   const car =new Car( {
-    typeCar:{
+    typeCar:[{
       reference: req.body.typeCar,
-      values:1//à completer
-    },
+      values:vartypeCar.values
+    }],
     colorCar:req.body.colorCar,
-    markCar:{
+    markCar:[{
       reference: req.body.typeCar,
-      values:1//à completer
-     },
+      values:varmarkCar.values
+     }],
     modelCar:req.body.modelCar,
     matricule: req.body.matricule,
     proprietaire: req.body.proprietaire,
     anneDeSortie:req.body.anneDeSortie,
     idUser : req.body.idUser
-   });
-   console.log('vitako objet');
+  //  });
+  //  car.typeCar.push(vartypeCar.values);
+   
+   console.log('vitako carcarcar'+vartypeCar.values);
+   console.log('vitako objet'+car);
    
    car.save()
       .then(() =>{
