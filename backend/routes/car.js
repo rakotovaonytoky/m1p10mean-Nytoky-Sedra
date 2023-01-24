@@ -9,24 +9,18 @@ const MarkCar=require("../models/markCar");
 const addCar= (req,res) =>{
   console.log({...req.body}); 
   delete req.body._id;
-  const vartypeCar = TypeCar.findOne({"reference":req.body.typeCar});
+  const vartypeCar = TypeCar.findOne({"reference":req.body.typeCar},{"reference":0,"values":1,"_id":0});
   const varmarkCar = MarkCar.find({"reference":req.body.markCar},{"reference":0,"values":1,"_id":0});
   const car =new Car( {
-    typeCar:[{
-      reference: req.body.typeCar,
-      values:vartypeCar.values
-    }],
+    typeCar:new TypeCar({...vartypeCar}),
     colorCar:req.body.colorCar,
-    markCar:[{
-      reference: req.body.typeCar,
-      values:varmarkCar.values
-     }],
+    markCar:new MarkCar({varmarkCar}),
     modelCar:req.body.modelCar,
     matricule: req.body.matricule,
     proprietaire: req.body.proprietaire,
     anneDeSortie:req.body.anneDeSortie,
     idUser : req.body.idUser
-  //  });
+    });
   //  car.typeCar.push(vartypeCar.values);
    
    console.log('vitako carcarcar'+vartypeCar.values);
