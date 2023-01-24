@@ -4,7 +4,8 @@ const Car = require('../models/car');
 const TypeReparation = require('../models/typeReparation');
 const CarController=require("../controller/car.controller")
 const { authJwt } = require("../middlewares/"); 
-
+const TypeCar=require("../models/typeCar");
+const MarkCar=require("../models/markCar");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -16,24 +17,49 @@ module.exports = function (app) {
   });
 }
 
+
 const addCar= (req,res) =>{
   console.log({...req.body}); 
-  delete req.body._id;  
-  const car =new Car( {
-    ...req.body
-   });
-   car.save()
+  delete req.body._id;
+  const vartypeCar = TypeCar.findOne({ "reference": req.body.typeCar });
+  const varmarkCar = MarkCar.find({ "reference": req.body.markCar });
+  vartypeCar.then((typeCarResponse) => {
+    console.log("typecar:tyh", typeCarResponse);
+    varmarkCar.then((markCarResult) => {
+      console.log("typecar:tyh", markCarResult);  
+      const car = new Car({
+        typeCar: typeCarResponse,
+        colorCar: req.body.colorCar,
+        markCar: markCarResult,
+        modelCar: req.body.modelCar,
+        matricule: req.body.matricule,
+        proprietaire: req.body.proprietaire,
+        anneDeSortie: req.body.anneDeSortie,
+        idUser: req.body.idUser
+      });
+      // delete car.TypeCar._id;
+      // delete car.MarkCar._id;
+      car.save()
       .then(() =>{
         console.log('[INFO] voiture Enregistré');
-        res.status(201).json(car.matricule)
+        res.json(car.matricule)
       })
     .catch((error) => {
       // catch uniquekey for Mail
+      
+      console.log('[INFO] voiture non enregistré');
         errMsg = error.message;
-        res.status(400).json(error);
-      }); 
+        res.json({errMsg});
+      });     
+     // return res.json(car);
+      
+    })
+    .catch((err) => {  res.status(404).json({message: err.message});})
+
+  }).catch((err) => {res.status(405).json({message: err.message});})
+  console.log("errrrrooooor");
 }
-    
+
 router.post('/car',(req,res)=>{addCar(req,res)});
 
 
