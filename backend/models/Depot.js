@@ -10,9 +10,14 @@ const depotCarSchema = mongoose.Schema(
         etat:  {
             type: Number,
             default: 0
-        }
+        },
+        date: {
+            type:Date,
+            required: true,
+            default:new Date()
+        },
     },
     // {_id:false}
 );
 // depotCarSchema.plugin(AutoIncrement);
-module.exports= mongoose.model('depotCar',depotCarSchema);
+module.exports= mongoose.model('DepotCar',depotCarSchema);

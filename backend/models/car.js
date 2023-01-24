@@ -27,15 +27,16 @@ const carSchema = mongoose.Schema(
                  type:String
              },
             idUser : {
-                type:String,
-                required:true
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"User"
             },
-                idDepot : {
-                 type: Schema.Types.ObjectId,
-                  ref: 'Depot'
-                }
+            etat : {
+                type: Number,
+                default: 0
+            }
             }
         
 );
-module.exports= mongoose.model('Car',carSchema)
+module.exports = mongoose.model('Car', carSchema)
+
 

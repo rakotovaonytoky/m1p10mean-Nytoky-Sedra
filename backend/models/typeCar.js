@@ -13,4 +13,4 @@ const typeCarSchema = mongoose.Schema(
     }
 );
 
-module.exports= mongoose.model('typeCar',typeCarSchema);
+module.exports= mongoose.model('TypeCar',typeCarSchema);
