@@ -3,8 +3,8 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const depotCarSchema = mongoose.Schema(
     {
         idCar:   {           
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Car"
+            type: String,
+            required: true
         },
         etat:  {
             type: Number,
