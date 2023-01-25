@@ -7,6 +7,8 @@ import { TypeReparation } from 'src/app/classes-v2/type-reparation';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 const API_URL = environment.baseUrl;
+let UNDEPOSIT_CAR = 0;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +20,10 @@ export class GlobalService {
 
   public get RefreshCar() {
     return this._refreshCar;
+  }
+  public get UNDEPOSIT_CAR() {
+    return UNDEPOSIT_CAR = 0;
+
   }
 
   getTypeCar(): Observable<TypeObject[]> {

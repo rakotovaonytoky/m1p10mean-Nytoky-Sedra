@@ -7,6 +7,9 @@ import { GlobalService } from 'src/app/service/globalService/global.service';
 import { CarV2 } from 'src/app/classes-v2/car-v2';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+
+
+const UNDEPOSIT_CAR = 0;
 @Component({
   selector: 'app-car-deposit',
   templateUrl: './car-deposit.component.html',
@@ -46,6 +49,9 @@ export class CarDepositComponent implements OnInit {
       next: data => {
         // this.listCar = Array.from(Object.values(data))[0];
         this.tableCar = data;
+        this.tableCar = this.tableCar.filter((car: any) => {
+          return car.etat === UNDEPOSIT_CAR
+        });
         console.log("fetching car !", data);
       },
       error: (error: any) => {
