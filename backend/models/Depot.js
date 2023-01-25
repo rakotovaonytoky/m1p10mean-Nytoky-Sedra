@@ -30,7 +30,10 @@ const depotCarSchema = mongoose.Schema(
             },
             values: {
                 type: String,
-            }
+            },
+             image:{
+            type:String
+             }
         }]
     },
    

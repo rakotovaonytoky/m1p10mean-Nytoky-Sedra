@@ -31,7 +31,14 @@ export class CarDepositComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
     private globalService: GlobalService,
     private snackBarService: SnackbarService,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+
+    this.user = this.authService.getUser();
+
+    this.globalService.RefreshCar.subscribe(result => {
+      this.getUnDepositCar(this.user.id);
+    })
+  }
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
@@ -52,7 +59,7 @@ export class CarDepositComponent implements OnInit {
         this.tableCar = this.tableCar.filter((car: any) => {
           return car.etat === UNDEPOSIT_CAR
         });
-        console.log("fetching car !", data);
+        // console.log("fetching car !", data);
       },
       error: (error: any) => {
         console.log("Error !", error);
@@ -120,7 +127,7 @@ export class CarDepositComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      console.log("selected Reparation", this.reparationSelected);
+      // console.log("selected Reparation", this.reparationSelected);
     }
   }
 
@@ -137,6 +144,28 @@ export class CarDepositComponent implements OnInit {
     if (this.depositForm.invalid) {
       return;
     }
+    const form = {
+      idCar: this.depositCar[0]._id,
+      idUser: this.user.id,
+      date: this.depositForm.get('date')?.value,
+      description: this.depositForm.get('description')?.value,
+      idtypeReparation: this.reparationSelected,
+    }
+    console.log(form);
+
+    this.globalService.addDepot(form).subscribe({
+      next: (data) => {
+        this.callSnackService('Voiture déposeé');
+        this.depositForm.get('description')?.reset();
+        this.reparationSelected = [];
+        this.depositCar = [];
+      },
+      error: (error) => {
+        this.callSnackServiceError("Une erreur s'est produite ! veuillez reessayer ");
+
+      }
+    })
+
   }
 
   callSnackService(message: string) {

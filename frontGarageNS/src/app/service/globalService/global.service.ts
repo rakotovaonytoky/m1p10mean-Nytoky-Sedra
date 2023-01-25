@@ -51,4 +51,12 @@ export class GlobalService {
     return this.httpClient.get<CarV2[]>(API_URL + userId + '/cars');
   }
 
+  addDepot(depot: any): Observable<any> {
+    return this.httpClient.post(API_URL + "/carDepot", depot).pipe(
+      tap(() => {
+        this._refreshCar.next();
+      }),
+    );
+  }
+
 }
