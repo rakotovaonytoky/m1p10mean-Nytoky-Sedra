@@ -2,11 +2,10 @@ var express = require('express');
 var router = express.Router();
 const Car = require('../models/car');
 const TypeReparation = require('../models/typeReparation');
-const CarController=require("../controller/car.controller")
+const CarController=require("../controller/car.controller");
 const { authJwt } = require("../middlewares/"); 
 const TypeCar=require("../models/typeCar");
 const MarkCar=require("../models/markCar");
-
 module.exports = function (app) {
   app.use(function (req, res, next) {
     res.header(
@@ -83,6 +82,8 @@ const { authJwt } = require("../middlewares");
         res.status(400).json(error);
       }); 
     }
+
+
  router.post('/AddsuggestRepairs',(req,res)=>{addTypeReparation(req,res)});
 
 router.get('/suggestRepairs', (req, res) => {
