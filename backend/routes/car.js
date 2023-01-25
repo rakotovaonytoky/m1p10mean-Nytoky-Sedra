@@ -86,7 +86,7 @@ const { authJwt } = require("../middlewares");
  router.post('/AddsuggestRepairs',(req,res)=>{addTypeReparation(req,res)});
 
 router.get('/suggestRepairs', (req, res) => {
-  TypeReparation.find({},{"reference":1,"values":1,"image":1,"_id":0})
+  TypeReparation.find()
 .then(typeReparations => {
     console.log('[INFO] affichage reussi');
     

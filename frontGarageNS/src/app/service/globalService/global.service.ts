@@ -3,6 +3,7 @@ import { Injectable, TypeProvider } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { CarV2 } from 'src/app/classes-v2/car-v2';
 import { TypeObject } from 'src/app/classes-v2/type-object';
+import { TypeReparation } from 'src/app/classes-v2/type-reparation';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 const API_URL = environment.baseUrl;
@@ -28,9 +29,9 @@ export class GlobalService {
     return this.httpClient.get<TypeObject[]>(API_URL + 'markcar');
   }
 
-  // getSuggestRepair() {
-  //   return this.httpClient.get()
-  // }
+  getSuggestRepair(): Observable<TypeReparation[]> {
+    return this.httpClient.get<TypeReparation[]>(API_URL + 'suggestRepairs');
+  }
 
   addCar(car: any): Observable<any> {
     return this.httpClient.post<any>(API_URL + "car", car).pipe(

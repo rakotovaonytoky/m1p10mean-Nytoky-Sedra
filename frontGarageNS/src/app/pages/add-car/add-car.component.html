@@ -109,7 +109,7 @@
         <h2 class="h2 text-center">Vos voitures</h2>
        
             <div class="col-lg-12">
-        <app-car-card *ngFor="let car of listCar" [vColor]="car.colorCar" [vType]="car.markCar[0].reference"
+        <app-car-card *ngFor="let car of listCar" [vColor]="car.colorCar" [vType]="car.typeCar[0].reference"
             [brand]="car.markCar[0].values" [model]="car.modelCar" [licensePlate]="car.matricule">
         </app-car-card>
             </div>

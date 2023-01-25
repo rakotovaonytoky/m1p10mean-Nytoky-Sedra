@@ -65,9 +65,9 @@
                            Mes réparations
                         </mat-chip>
                         <mat-chip  *ngFor="let rs of reparationSelected" cdkDrag>
-                            <img matChipAvatar src="/assets/img/reparation/{{rs.img}}"
+                            <img matChipAvatar src="/assets/img/reparation/{{rs.image}}"
                                 alt="image" />
-                        {{rs.value}}
+                        {{rs.values}}
                         </mat-chip>
                        
                     </mat-chip-list>
@@ -109,12 +109,12 @@
                         [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="dropReparation($event)"
                             class="repair-list" >
                             <div  class="repair-details"  >
-                                <img src="/assets/img/reparation/1.png" alt="" cdkDrag>
-                            Selectionnez une réparation et deposez dans la zone gris.
+                                <img src="/assets/img/reparation/1.png" alt="" >
+                            Selectionnez une réparation et deposez dans la zone gris "Mes réparations".
                             </div>
                             <div  class="repair-details" *ngFor="let r of reparationList" cdkDrag>
-                                <img src="/assets/img/reparation/{{r.img}}" alt="">
-                              {{r.value}}
+                                <img src="/assets/img/reparation/{{r.image}}" alt="">
+                              {{r.values}}
                             </div>
                         </div>
                     </div>

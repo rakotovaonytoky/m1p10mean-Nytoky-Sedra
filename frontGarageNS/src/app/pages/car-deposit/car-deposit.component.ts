@@ -1,8 +1,9 @@
-import { TypeReparation } from './../../classes/type-reparation';
+import { TypeReparation } from './../../classes-v2/type-reparation';
 import { Car } from './../../classes/car';
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormBuilder, Validators } from '@angular/forms';
+import { GlobalService } from 'src/app/service/globalService/global.service';
 @Component({
   selector: 'app-car-deposit',
   templateUrl: './car-deposit.component.html',
@@ -12,15 +13,16 @@ export class CarDepositComponent implements OnInit {
 
   tableCar!: Car[];
   depositCar!: Car[];
-  reparationList!: TypeReparation[];
-  reparationSelected!: TypeReparation[];
+  reparationList!: any;
+  reparationSelected!: any;
 
   depositForm = this._formBuilder.group({
     date: ['', Validators.required],
     description: ['', Validators.required],
   });
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder,
+    private globalService: GlobalService) { }
 
   ngOnInit(): void {
     this.getUnDepositCar();
@@ -40,13 +42,14 @@ export class CarDepositComponent implements OnInit {
     ]
   }
   getListReparation() {
-    this.reparationList = [
-      { idType: 1, value: "Diagnositque", img: "1.png" },
-      { idType: 2, value: "Verification frein", img: "2.png" },
-      { idType: 3, value: "Vidange", img: "3.png" },
-      { idType: 4, value: "Polissage  pneus", img: "4.png" },
-      { idType: 5, value: "Suspension et direction", img: "5.png" }
-    ]
+
+    this.globalService.getSuggestRepair().subscribe({
+      next: (data: any) => {
+        this.reparationList = Array.from(Object.values(data))[0];
+        // console.log("reparation list", this.reparationList);
+      },
+      error: (err) => { }
+    })
   }
 
   drop(event: CdkDragDrop<Car[]>) {
@@ -95,6 +98,7 @@ export class CarDepositComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+      console.log("selected Reparation", this.reparationSelected);
     }
   }
 
