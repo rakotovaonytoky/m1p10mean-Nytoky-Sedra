@@ -1,6 +1,6 @@
 export class User {
     _id!: string;
-    name!: number;
+    name!: string;
     email!: string;
 
     public constructor(init?: Partial<User>) {

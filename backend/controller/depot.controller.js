@@ -8,8 +8,8 @@ const WAIT_VALIDATION = 1;
 const WAIT_REPARATION = 2;
 const REPARATION_PROGRESS = 3;
 const WAIT_CHECKOUT = 4;
-const RECOVER_CAR = 5
-
+const CHECKOUT = 5;
+const SORTIE = 0;
 
 exports.DoDepot= (req,res ) =>{ 
         const depot =new  Depot( {
@@ -81,9 +81,12 @@ exports.findDepotWaitCheckoutApi = (req, res) => {
     .catch(err => {return res.status(500).json({message:err.message}); })
 }
 
-
-
 exports.findDepotByType = (etat) =>{
   return Depot.find({ etat: etat }).populate("idCar").populate("idUser"," name email");
+}
+exports.findDepotById = (req, res) => {
+  Depot.findById(req.params.idDepot).populate("idCar").populate("idUser", " name email")
+    .then(element => { return res.status(200).json(element) })
+  .catch(err => {return res.status(500).json({message:err.message})})
 }
   

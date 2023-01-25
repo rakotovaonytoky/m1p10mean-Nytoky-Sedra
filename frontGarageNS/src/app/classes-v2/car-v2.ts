@@ -2,9 +2,9 @@ import { TypeObject } from "./type-object";
 
 export class CarV2 {
     _id!: string;
-    typeCar!: TypeObject;
+    typeCar!: [TypeObject];
     colorCar!: string;
-    markCar!: TypeObject;
+    markCar!: [TypeObject];
     modelCar!: string;
     matricule!: string;
     proprietaire!: string;

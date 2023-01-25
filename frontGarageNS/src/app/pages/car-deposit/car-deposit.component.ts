@@ -57,7 +57,7 @@ export class CarDepositComponent implements OnInit {
         // this.listCar = Array.from(Object.values(data))[0];
         this.tableCar = data;
         this.tableCar = this.tableCar.filter((car: any) => {
-          return car.etat === UNDEPOSIT_CAR
+          return car.etat === this.globalService.UNDEPOSIT_CAR
         });
         // console.log("fetching car !", data);
       },

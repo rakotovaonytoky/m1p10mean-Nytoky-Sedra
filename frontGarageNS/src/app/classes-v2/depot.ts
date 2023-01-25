@@ -1,5 +1,6 @@
-import { TypeReparation } from "../classes/type-reparation";
+
 import { CarV2 } from "./car-v2";
+import { TypeReparation } from "./type-reparation";
 import { User } from "./user";
 
 export class Depot {
@@ -9,7 +10,7 @@ export class Depot {
     date!: Date;
     description!: string;
     idUser!: User;
-    idtypeReparation!: TypeReparation;
+    idtypeReparation!: [TypeReparation];
 
     public constructor(init?: Partial<Depot>) {
         Object.assign(this, init);

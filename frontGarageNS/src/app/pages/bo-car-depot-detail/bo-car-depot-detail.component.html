@@ -1,12 +1,12 @@
 <app-slider></app-slider>
-<div class="page-content container">
+<div class="page-content container" *ngIf="depot">
     
     <div class="page-header text-blue-d2">
         
         <h1 class="d-flex page-title text-secondary-d1 fw-bold">
-            Deposer le :
+             Voiture :
             <small class="page-info">
-                2023/01/10
+                {{depot.idCar.matricule }}&nbsp; {{depot.idCar. modelCar}}
             </small>
         </h1>
        
@@ -18,20 +18,22 @@
                     <div class="col-sm-6">
                         <div>
                             <p class="h4">
-                                <span class="align-middle">Voiture:</span>
-                                <span class="text-600 text-110 text-blue align-middle"> 4444 TBN POLO 4</span>
+                                <span class="align-middle">Deposer le :</span>
+                                <span class="text-600 text-110 text-blue align-middle">{{depot.date | date:"dd-MM-yy"}} &nbsp; </span>
                             </p>
                         </div>
                         <div>
                             <p class="h4">
                                 <span class="align-middle">Proprietaire:</span>
-                                <span class="text-600 text-110 text-blue align-middle"> Rabe</span>
+                                <span class="text-600 text-110 text-blue align-middle"> {{depot.idUser.name}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="h5">
-                                <span class="align-middle">Description Details:</span>
-                                <span class="text-600 text-110 text-blue align-middle"> ....</span>
+                                <span class="align-middle">Description details:</span>
+                                <span class="text-600 text-110 text-blue align-middle"> 
+                                    {{depot.description}}.
+                                </span>
                             </p>
                         </div>
                     </div>
@@ -40,19 +42,25 @@
 
         </div>
     </div>
-    <div class="container mb-3">
+    <br>
+    <div class="container mb-3 mt-2">
         <div class="row">
-                <p class="h5 text-center">Suggestion reparation selectionnés</p>
+                <p class="h5 text-center">Suggestions de réparation sélectionnées</p>
             <div class="col-12 col-lg-12">
-                <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
-                    <ng-container matColumnDef="item">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="listSuggestion">
+
+                    <ng-container matColumnDef="Position">
                         <th mat-header-cell *matHeaderCellDef> # </th>
-                        <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+                        <td mat-cell *matCellDef="let element;let index=index"> 
+                            <span class="fw-bold">{{index+1}} &nbsp;</span> 
+                    <img src="/assets/img/reparation/{{element.image}}" alt="" width="40">
+
+                        </td>
                         
                     </ng-container>
-                    <ng-container matColumnDef="cost">
+                    <ng-container matColumnDef="Suggestion">
                         <th mat-header-cell *matHeaderCellDef> Suggestion </th>
-                        <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+                        <td mat-cell *matCellDef="let element" class="fw-bold"> {{element.values}}</td>
                         
                     </ng-container>
 
@@ -70,7 +78,7 @@
             </div>
         </div>
     </div>
-    <div class="container mb-3">
+    <div class="container mb-3" *ngIf="etatDepot !== depot.etat">
         <div class="row">
                 <p class="h5 text-center">Facture</p>
                 <div class="example-container d-flex align-bottom">
@@ -92,8 +100,9 @@
 
                     </div>
                 </div>
-            <div class="col-12 col-lg-12">
-                <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+
+            <!-- <div class="col-12 col-lg-12">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                     <ng-container matColumnDef="item">
                         <th mat-header-cell *matHeaderCellDef> # </th>
                         <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
@@ -110,12 +119,13 @@
                   
                 </table>
             </div>
+
             <div class="d-flex justify-content-end mt-3">
                 <button class="" mat-raised-button color="custom-primary" (click)="validateDepot()">Clôturer</button> 
             </div>
             <div class="d-flex justify-content-start mt-3">
-               
-            </div>
+            </div> -->
+
         </div>
     </div>
 </div>

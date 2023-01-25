@@ -28,7 +28,10 @@ export class GlobalService {
   }
   public get UNDEPOSIT_CAR() {
     return UNDEPOSIT_CAR = 0;
+  }
 
+  public get WAIT_VALIDATION() {
+    return WAIT_VALIDATION;
   }
 
   getTypeCar(): Observable<TypeObject[]> {
@@ -68,4 +71,7 @@ export class GlobalService {
     return this.httpClient.get<Depot[]>(API_URL + 'carInDepot');
   }
 
+  getDepotById(id: string): Observable<Depot> {
+    return this.httpClient.get<Depot>(API_URL + "depot/" + id);
+  }
 }
