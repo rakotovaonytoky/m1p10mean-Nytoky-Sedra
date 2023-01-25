@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormBuilder, Validators } from '@angular/forms';
 import { GlobalService } from 'src/app/service/globalService/global.service';
+import { CarV2 } from 'src/app/classes-v2/car-v2';
+import { AuthService } from 'src/app/service/auth/auth.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
   selector: 'app-car-deposit',
   templateUrl: './car-deposit.component.html',
@@ -11,8 +14,9 @@ import { GlobalService } from 'src/app/service/globalService/global.service';
 })
 export class CarDepositComponent implements OnInit {
 
-  tableCar!: Car[];
-  depositCar!: Car[];
+  user!: any;
+  tableCar!: any;
+  depositCar!: any;
   reparationList!: any;
   reparationSelected!: any;
 
@@ -22,25 +26,36 @@ export class CarDepositComponent implements OnInit {
   });
 
   constructor(private _formBuilder: FormBuilder,
-    private globalService: GlobalService) { }
+    private globalService: GlobalService,
+    private snackBarService: SnackbarService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.getUnDepositCar();
+    this.user = this.authService.getUser();
     this.getListReparation();
     this.depositCar = [];
     this.reparationSelected = [];
+    this.getUnDepositCar(this.user.id);
+
+
   }
 
-  getUnDepositCar() {
-    this.tableCar = [
-      {
-        vType: 1, vColor: "orange", brand: "1", model: "POLO 4", licensePlate: "4444 TBN", owner: "Rakoto", year: 2000
+  getUnDepositCar(idUser: string) {
+
+    this.globalService.getUsersCar(idUser).subscribe({
+      next: data => {
+        // this.listCar = Array.from(Object.values(data))[0];
+        this.tableCar = data;
+        console.log("fetching car !", data);
       },
-      {
-        vType: 2, vColor: "red", brand: "1", model: "POLO 4", licensePlate: "4444 TBN", owner: "Rakoto", year: 2000
+      error: (error: any) => {
+        console.log("Error !", error);
+
       }
-    ]
+    })
+
   }
+
   getListReparation() {
 
     this.globalService.getSuggestRepair().subscribe({
@@ -52,7 +67,7 @@ export class CarDepositComponent implements OnInit {
     })
   }
 
-  drop(event: CdkDragDrop<Car[]>) {
+  drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -63,10 +78,11 @@ export class CarDepositComponent implements OnInit {
     }
   }
 
-  checkIfCarInDeposit(event: CdkDragDrop<Car[]>) {
+  checkIfCarInDeposit(event: CdkDragDrop<any>) {
 
     if (event.previousContainer.id === "cdk-drop-list-0" && event.container.id === "cdk-drop-list-1") {
       if (this.depositCar.length < 1) {
+        this.callSnackService("Voiture ajoutée.")
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
@@ -74,7 +90,7 @@ export class CarDepositComponent implements OnInit {
           event.currentIndex,
         );
       } else {
-        alert("efa misy automobile ao");
+        this.callSnackServiceError("Une voiture est déjà en cours de déposition.");
       }
 
     }
@@ -89,7 +105,7 @@ export class CarDepositComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       if (this.depositCar.length < 1) {
-        alert("mbola tsisy daba");
+        this.callSnackServiceError("Veuillez d'abord sélectionner une voiture.");
         return;
       }
       transferArrayItem(
@@ -109,12 +125,23 @@ export class CarDepositComponent implements OnInit {
   }
   depositSubmitting() {
     if (this.depositCar.length < 1) {
-      alert("mbola tsisy daba");
+      this.callSnackServiceError("Veuillez d'abord sélectionner une voiture.");
       return;
     }
     if (this.depositForm.invalid) {
       return;
     }
+  }
+  callSnackService(message: string) {
+    this.snackBarService.openSnackBar(
+      message,
+      'Okey', 'center', 'top', ['green-snackbar', 'login-snackbar']);
+  }
+
+  callSnackServiceError(error: string) {
+    this.snackBarService.openSnackBar(
+      error,
+      'Okey', 'center', 'top', ['red-snackbar']);
   }
 
 }
