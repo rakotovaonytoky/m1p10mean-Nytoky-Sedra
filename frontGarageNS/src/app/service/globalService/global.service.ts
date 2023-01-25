@@ -2,13 +2,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, TypeProvider } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { CarV2 } from 'src/app/classes-v2/car-v2';
+import { Depot } from 'src/app/classes-v2/depot';
 import { TypeObject } from 'src/app/classes-v2/type-object';
 import { TypeReparation } from 'src/app/classes-v2/type-reparation';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 const API_URL = environment.baseUrl;
 let UNDEPOSIT_CAR = 0;
-
+let WAIT_VALIDATION = 1;
+let WAIT_REPARATION = 2;
+let REPARATION_PROGRESS = 3;
+let WAIT_CHECKOUT = 4;
+let RECOVER_CAR = 5
 @Injectable({
   providedIn: 'root'
 })
@@ -44,7 +49,7 @@ export class GlobalService {
       tap(() => {
         this._refreshCar.next();
       }),
-    );;
+    );
   }
 
   getUsersCar(userId: string): Observable<CarV2[]> {
@@ -57,6 +62,10 @@ export class GlobalService {
         this._refreshCar.next();
       }),
     );
+  }
+
+  getCarWaitValidation(): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + 'carInDepot');
   }
 
 }

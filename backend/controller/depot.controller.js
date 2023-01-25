@@ -1,7 +1,16 @@
 
 const Car = require('../models/car');
 const Depot=require("../models/Depot");
-const TypeReparation=require("../models/typeReparation");
+const TypeReparation = require("../models/typeReparation");
+
+const UNDEPOSIT_CAR = 0;
+const WAIT_VALIDATION = 1;
+const WAIT_REPARATION = 2;
+const REPARATION_PROGRESS = 3;
+const WAIT_CHECKOUT = 4;
+const RECOVER_CAR = 5
+
+
 exports.DoDepot= (req,res ) =>{ 
         const depot =new  Depot( {
           ...req.body
@@ -26,37 +35,6 @@ exports.DoDepot= (req,res ) =>{
      })
     .catch((err) => {res.status(500).json({message: err.message})});
 
-        //  depot.save()
-        //     .then(() =>{
-        //       console.log('[INFO] voiture deposé!');
-        //       const thecar = Car.findOne({ "_id": req.body.idCar });
-        
-        //       thecar.then((car) => {
-        //         //console.log("car:tyh", car);
-        //            hisCar = car;
-        //             hisCar.etat=1;
-        //       hisCar.save() 
-        //       .then(() =>{
-        //         console.log('[INFO] etatCar set to 1');
-        //         res.status(200).json(hisCar.matricule);
-        //       })
-        //     .catch((error) => {
-        //       // catch uniquekey for Mail
-        //         errMsg = error.message;
-        //         res.status(400).json(error);
-        //       }); 
-        //     })
-        //   .catch((error) => {
-        //     // catch uniquekey for Mail
-        //       errMsg = error.message;
-        //       res.status(400).json(error);
-        //     }); 
-        //   }) .catch((error) => {
-        //     // catch uniquekey for Mail
-        //       errMsg = error.message;
-        //       res.status(400).json(error)});
-        
- 
 }
  
 exports.findTypeReparation = (reference) =>{
@@ -70,7 +48,6 @@ exports.findTypeReparation = (reference) =>{
 }
 
 exports.findDepotByUserApi = (req, res) => {
-  console.log(req.params.idUser);
  Depot.find({idUser:req.params.idUser}).populate("idCar")
     .exec((err, depot) => {
       if (err) {
@@ -80,14 +57,33 @@ exports.findDepotByUserApi = (req, res) => {
     });
 }
 
-exports.findDepotByUser = (idUser) =>{
-  Depot.find({ 'idCar.idUser': idUser }).populate("idCar")
-    .exec((err, depot) => {
-      if (err) {
-        throw err;
-      }
-      return depot;
-    });
-    
+exports.findDepotWaitValidationApi = (req, res) => {
+  this.findDepotByType(WAIT_VALIDATION)
+    .then(element => { return res.status(200).json(element);})
+    .catch(err => {return res.status(500).json({message:err.message}); })
+}
+
+exports.findDepotWaitReparationApi = (req, res) => {
+  this.findDepotByType(WAIT_REPARATION)
+    .then(element => { return res.status(200).json(element);})
+    .catch(err => {return res.status(500).json({message:err.message}); })
+}
+
+exports.findDepotReparationProgressApi = (req, res) => {
+  this.findDepotByType(REPARATION_PROGRESS)
+    .then(element => { return res.status(200).json(element);})
+    .catch(err => {return res.status(500).json({message:err.message}); })
+}
+
+exports.findDepotWaitCheckoutApi = (req, res) => {
+  this.findDepotByType(WAIT_CHECKOUT)
+    .then(element => { return res.status(200).json(element);})
+    .catch(err => {return res.status(500).json({message:err.message}); })
+}
+
+
+
+exports.findDepotByType = (etat) =>{
+  return Depot.find({ etat: etat }).populate("idCar").populate("idUser"," name email");
 }
   
