@@ -9,12 +9,22 @@ exports.DoDepot= (req,res ) =>{
   console.log({ depot }); 
 
   depot.save()
-    .then((element) => {
-       res.status(200).json(element);
+    .then((depot) => {
+      //  res.status(200).json(element);
+      const thecar = Car.findOne({ "_id": req.body.idCar });
+      thecar.then((car) => {
+         hisCar = car;
+        hisCar.etat = 1;
+        hisCar.save() 
+              .then(() =>{
+                console.log('[INFO] etatCar set to 1');
+                res.status(200).json(depot);
+              })
+              .catch(err =>  res.status(500).json({message: err.message})); 
+      })
+        .catch(err =>  res.status(500).json({message: err.message}));
      })
-    .catch((err) => {
-       res.status(500).json({message: err.message});
-     });
+    .catch((err) => {res.status(500).json({message: err.message})});
 
         //  depot.save()
         //     .then(() =>{

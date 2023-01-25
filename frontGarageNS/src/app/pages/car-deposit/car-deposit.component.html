@@ -82,8 +82,8 @@
                     
                         <mat-form-field appearance="outline">
                             <mat-label>Date de déposition</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="date">
-                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <input matInput [matDatepicker]="picker" formControlName="date" [disabled]="true">
+                            <mat-hint>DD/MM/YYYY</mat-hint>
                             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -95,7 +95,6 @@
                     </mat-form-field>
                     <div class=" group-button ">
                         <button mat-flat-button color="custom-primary" >Déposer</button>
-                        <button mat-flat-button color="seoncary" >Demander</button>
                     </div>
                 </form>
             </div>

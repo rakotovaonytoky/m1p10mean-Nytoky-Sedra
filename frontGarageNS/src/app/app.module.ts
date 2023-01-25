@@ -32,6 +32,7 @@ import { BoInvoiceComponent } from './pages/bo-invoice/bo-invoice.component';
 import { GlobalLoaderComponent } from './components/global-loader/global-loader.component';
 import { LoaderService } from './service/loader/loader.service';
 import { AppinterceptorService } from './service/interceptor/appinterceptor.service';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { AppinterceptorService } from './service/interceptor/appinterceptor.serv
   ],
   providers: [LoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: AppinterceptorService, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ],
   bootstrap: [AppComponent]
 })

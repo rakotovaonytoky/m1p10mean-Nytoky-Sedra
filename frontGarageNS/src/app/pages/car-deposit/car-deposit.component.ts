@@ -24,7 +24,7 @@ export class CarDepositComponent implements OnInit {
   reparationSelected!: any;
 
   depositForm = this._formBuilder.group({
-    date: ['', Validators.required],
+    date: [new Date(), Validators.required],
     description: ['', Validators.required],
   });
 
@@ -138,6 +138,7 @@ export class CarDepositComponent implements OnInit {
       return;
     }
   }
+
   callSnackService(message: string) {
     this.snackBarService.openSnackBar(
       message,
