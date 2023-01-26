@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Depot } from 'src/app/classes-v2/depot';
 import { TypeReparation } from 'src/app/classes-v2/type-reparation';
 import { GlobalService } from 'src/app/service/globalService/global.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 
 @Component({
   selector: 'app-bo-car-depot-detail',
@@ -17,17 +18,28 @@ export class BoCarDepotDetailComponent implements OnInit {
   depot!: Depot;
   listSuggestion!: any;
   etatDepot!: any;
+  deposerEtat!: any;
+  reparationFini!: any;
   dataSource!: MatTableDataSource<TypeReparation>;
   displayedColumns: string[] = ['Position', 'Suggestion'];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private globalService: GlobalService) { }
+    private globalService: GlobalService,
+    private snackBarService: SnackbarService) {
+
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.globalService.RefreshDepot.subscribe(data => {
+      this.getDepotByid(this.id);
+    });
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getDepotByid(this.id);
     this.etatDepot = this.globalService.WAIT_VALIDATION;
+    this.deposerEtat = this.globalService.WAIT_REPARATION;
+    this.reparationFini = this.globalService.WAIT_CHECKOUT;
   }
 
   getTotalCost() {
@@ -35,7 +47,15 @@ export class BoCarDepotDetailComponent implements OnInit {
   }
 
   validateDepot() {
-    alert("Validation depôt");
+    this.globalService.validateDepot(this.id).subscribe({
+      next: () => {
+        this.callSnackService('Depot validé');
+      },
+      error: (error: any) => {
+
+        this.callSnackService("Une erreur s'est produite!");
+      }
+    })
   }
   backToDepot() {
     this.router.navigate(
@@ -64,6 +84,20 @@ export class BoCarDepotDetailComponent implements OnInit {
       }
     })
   }
+  callSnackService(message: string) {
+    this.snackBarService.openSnackBar(
+      message,
+      'Okey', 'center', 'top', ['green-snackbar', 'login-snackbar']);
+  }
+
+  callSnackServiceError(message: string) {
+    this.snackBarService.openSnackBar(
+      message,
+      'Okey', 'center', 'top', ['red-snackbar']);
+  }
+
+
+
 
 
 }

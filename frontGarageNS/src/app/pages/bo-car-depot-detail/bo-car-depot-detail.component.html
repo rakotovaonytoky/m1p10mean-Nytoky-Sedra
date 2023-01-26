@@ -71,14 +71,17 @@
             </div>
             <div class="d-flex justify-content-between  mt-3">
                 <button mat-raised-button color="secondary" (click)="backToDepot()">Retour</button>
-                <button class="" mat-raised-button color="custom-primary" (click)="validateDepot()">Valider depôt</button> 
+                <button class="" mat-raised-button color="custom-primary" (click)="validateDepot()" [disabled]="depot.etat === deposerEtat">Valider depôt</button> 
             </div>
-            <div class="d-flex justify-content-start mt-3">
-               
+            <br/>
+            <div class="col-12 mt-2">
+               <div class="alert alert-success" *ngIf="depot.etat === deposerEtat">
+                Dépot validé.
+               </div>
             </div>
         </div>
     </div>
-    <div class="container mb-3" *ngIf="etatDepot !== depot.etat">
+    <div class="container mb-3" *ngIf="reparationFini === depot.etat">
         <div class="row">
                 <p class="h5 text-center">Facture</p>
                 <div class="example-container d-flex align-bottom">

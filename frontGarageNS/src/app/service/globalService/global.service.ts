@@ -20,11 +20,15 @@ let RECOVER_CAR = 5
 export class GlobalService {
 
   private _refreshCar = new Subject<void>();
+  private _refreshDepot = new Subject<void>();
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   public get RefreshCar() {
     return this._refreshCar;
+  }
+  public get RefreshDepot() {
+    return this._refreshDepot;
   }
   public get UNDEPOSIT_CAR() {
     return UNDEPOSIT_CAR = 0;
@@ -32,6 +36,12 @@ export class GlobalService {
 
   public get WAIT_VALIDATION() {
     return WAIT_VALIDATION;
+  }
+  public get WAIT_REPARATION() {
+    return WAIT_REPARATION;
+  }
+  public get WAIT_CHECKOUT() {
+    return WAIT_CHECKOUT;
   }
 
   getTypeCar(): Observable<TypeObject[]> {
@@ -102,6 +112,44 @@ export class GlobalService {
   }
   getUsersCarReparationDone(userId: string): Observable<Depot[]> {
     return this.httpClient.get<Depot[]>(API_URL + userId + '/carReparationDone');
+  }
+
+  validateDepot(id: string): Observable<any> {
+    return this.httpClient.post(API_URL + "validateDepot/" + id, {}).pipe(
+      tap(() => {
+        this._refreshDepot.next();
+      })
+    );
+  }
+
+  DepotTorepair(id: string): Observable<any> {
+    return this.httpClient.post(API_URL + "reparer/" + id, {}).pipe(
+      tap(() => {
+        this._refreshDepot.next();
+      })
+    );
+  }
+
+  DepotToDoneRepair(id: string): Observable<any> {
+    return this.httpClient.post(API_URL + "terminer/" + id, {}).pipe(
+      tap(() => {
+        this._refreshDepot.next();
+      })
+    );
+  }
+  DepotToFacturer(id: string): Observable<any> {
+    return this.httpClient.post(API_URL + "facturer/" + id, {}).pipe(
+      tap(() => {
+        this._refreshDepot.next();
+      })
+    );
+  }
+  DepotFinir(id: string): Observable<any> {
+    return this.httpClient.post(API_URL + "finir/" + id, {}).pipe(
+      tap(() => {
+        this._refreshDepot.next();
+      })
+    );
   }
 
 }
