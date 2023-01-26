@@ -7,7 +7,7 @@ const UNDEPOSIT_CAR = 0;
 const WAIT_VALIDATION = 1;
 const WAIT_REPARATION = 2;
 const REPARATION_PROGRESS = 3;
-const WAIT_CHECKOUT = 4;
+const REPARATION_DONE = 4;
 const CHECKOUT = 5;
 const SORTIE = 0;
 
@@ -47,15 +47,7 @@ exports.findTypeReparation = (reference) =>{
     })
 }
 
-exports.findDepotByUserApi = (req, res) => {
- Depot.find({idUser:req.params.idUser}).populate("idCar")
-    .exec((err, depot) => {
-      if (err) {
-        return res.status(500).json({message:err.message});
-      }
-      return res.status(200).json(depot);
-    });
-}
+
 
 exports.findDepotWaitValidationApi = (req, res) => {
   this.findDepotByType(WAIT_VALIDATION)
@@ -75,8 +67,14 @@ exports.findDepotReparationProgressApi = (req, res) => {
     .catch(err => {return res.status(500).json({message:err.message}); })
 }
 
-exports.findDepotWaitCheckoutApi = (req, res) => {
-  this.findDepotByType(WAIT_CHECKOUT)
+exports.findDepotReparationDoneApi = (req, res) => {
+  this.findDepotByType(REPARATION_DONE)
+    .then(element => { return res.status(200).json(element);})
+    .catch(err => {return res.status(500).json({message:err.message}); })
+}
+
+exports.findDepotCheckoutApi = (req, res) => {
+  this.findDepotByType(CHECKOUT)
     .then(element => { return res.status(200).json(element);})
     .catch(err => {return res.status(500).json({message:err.message}); })
 }
@@ -88,5 +86,72 @@ exports.findDepotById = (req, res) => {
   Depot.findById(req.params.idDepot).populate("idCar").populate("idUser", " name email")
     .then(element => { return res.status(200).json(element) })
   .catch(err => {return res.status(500).json({message:err.message})})
+}
+
+exports.findDepotByUserApi = (req, res) => {
+ Depot.find({idUser:req.params.idUser}).populate("idCar")
+    .exec((err, depot) => {
+      if (err) {
+        return res.status(500).json({message:err.message});
+      }
+      return res.status(200).json(depot);
+    });
+}
+
+exports.findepotByUserUnDepot= (req,res)=>{
+Depot.find({idUser:req.params.idUser,etat: UNDEPOSIT_CAR}).populate("idCar")
+    .exec((err, depot) => {
+      if (err) {
+        return res.status(500).json({message:err.message});
+      }
+      return res.status(200).json(depot);
+    });
+}
+exports.findepotByUserWaitValidation= (req,res)=>{
+Depot.find({idUser:req.params.idUser,etat: WAIT_VALIDATION}).populate("idCar")
+    .exec((err, depot) => {
+      if (err) {
+        return res.status(500).json({message:err.message});
+      }
+      return res.status(200).json(depot);
+    });
+}
+exports.findepotByUserWaitReparation= (req,res)=>{
+Depot.find({idUser:req.params.idUser,etat: WAIT_REPARATION}).populate("idCar")
+    .exec((err, depot) => {
+      if (err) {
+        return res.status(500).json({message:err.message});
+      }
+      return res.status(200).json(depot);
+    });
+}
+exports.findepotByUserReparationProgress= (req,res)=>{
+Depot.find({idUser:req.params.idUser,etat: REPARATION_PROGRESS}).populate("idCar")
+    .exec((err, depot) => {
+      if (err) {
+        return res.status(500).json({message:err.message});
+      }
+      return res.status(200).json(depot);
+    });
+}
+  
+exports.findepotByUserReparationDone= (req,res)=>{
+Depot.find({idUser:req.params.idUser,etat: REPARATION_DONE}).populate("idCar")
+    .exec((err, depot) => {
+      if (err) {
+        return res.status(500).json({message:err.message});
+      }
+      return res.status(200).json(depot);
+    });
+}
+
+exports.findepotByUserCheckout= (req,res)=>{
+Depot.find({idUser:req.params.idUser,etat: CHECKOUT}).populate("idCar")
+    .exec((err, depot) => {
+      if (err) {
+        return res.status(500).json({message:err.message});
+      }
+      return res.status(200).json(depot);
+    });
 }
   

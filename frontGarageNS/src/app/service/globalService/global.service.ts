@@ -67,11 +67,41 @@ export class GlobalService {
     );
   }
 
-  getCarWaitValidation(): Observable<Depot[]> {
-    return this.httpClient.get<Depot[]>(API_URL + 'carInDepot');
-  }
-
   getDepotById(id: string): Observable<Depot> {
     return this.httpClient.get<Depot>(API_URL + "depot/" + id);
   }
+
+  getCarWaitValidation(): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + 'carInDepot');
+  }
+  getCarWaitReparation(): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + 'carWaitReparation');
+  }
+
+  getCarReparationProgress(): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + 'carReparationProgress');
+  }
+
+  getCarReparationDone(): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + 'carReparationDone');
+  }
+
+  getCarCheckoutDone(): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + 'carReparationCheckoutDone');
+  }
+
+  getUsersCarUnDepot(userId: string): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + userId + '/CarUnDepot');
+  }
+
+  getUsersCarWaitValidation(userId: string): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + userId + '/carWaitValidation');
+  }
+  getUsersCarReparationProgress(userId: string): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + userId + '/carReparationProgress');
+  }
+  getUsersCarReparationDone(userId: string): Observable<Depot[]> {
+    return this.httpClient.get<Depot[]>(API_URL + userId + '/carReparationDone');
+  }
+
 }
