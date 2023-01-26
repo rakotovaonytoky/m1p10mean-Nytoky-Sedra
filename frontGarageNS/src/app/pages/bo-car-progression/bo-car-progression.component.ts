@@ -15,9 +15,12 @@ export class BoCarProgressionComponent implements OnInit {
   CarReparationProgress!: Depot[];
   CarReparationDone!: Depot[];
   ngOnInit(): void {
+    this.getCarWaitReparation();
+    this.getCarReparationProgress();
+    this.getCarReparationDone();
   }
-  getCarWaitValidation() {
-    this.globalService.getCarWaitValidation().subscribe({
+  getCarWaitReparation() {
+    this.globalService.getCarWaitReparation().subscribe({
       next: (value: Depot[]) => {
         this.CarWaitValidation = value;
         console.log("reparation wait", this.CarWaitValidation);

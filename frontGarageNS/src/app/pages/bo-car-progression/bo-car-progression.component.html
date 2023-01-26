@@ -1,15 +1,18 @@
 <app-slider [pageDescription]="'Avacement réparation '"></app-slider>
 <div class="container-fluid pt-3">
-    <h3 class="font-weight  text-center fs-3">Avancement réparation</h3>
+    <h3 class="font-weight  text-center fs-3">Avancement des réparations</h3>
     <div class="row flex-row flex-sm-nowrap py-3">
         <div class="col-sm-6 col-md-4 col-xl-4">
             <div class="card bg-light">
                 <div class="card-body">
-                    <h6 class="card-title text-uppercase  py-2">En attente de validation:</h6>
-                    <div class="items border border-light">
-                        <div class="card draggable shadow-sm" id="cd1">
-                            <app-car-card-progress [vColor]="'black'" [vType]="1" [date]="'26 janvier 2023'"
-                                [licencePlate]="'444 TBN'"></app-car-card-progress>
+                    <h6 class="card-title text-uppercase  py-2">En attente de Réparation:</h6>
+                    <div class="items border border-light" *ngIf="CarWaitValidation">
+                        <div class="card draggable shadow-sm" id="cd1" *ngFor="let cw of CarWaitValidation">
+                            <!-- <app-car-card-progress [vColor]="'black'" [vType]="1" [date]="'26 janvier 2023'"
+                            [licencePlate]="'444 TBN'"></app-car-card-progress> -->
+                            <app-car-card-progress [vColor]="cw.idCar.colorCar" [vType]="cw.idCar.typeCar[0].reference"
+                                [date]="cw.date | date: 'YYYY/MM/dd'"
+                                [licencePlate]="cw.idCar.matricule"></app-car-card-progress>
                         </div>
                     </div>
                 </div>
@@ -20,15 +23,16 @@
             <div class="card bg-light">
                 <div class="card-body">
                     <h6 class="card-title text-uppercase text-truncate py-2">En réparation</h6>
-                    <div class="items border border-light">
-                        <div class="card draggable shadow-sm" id="cd1">
-                            <app-car-card-progress [vColor]="'black'" [vType]="1" [date]="'26 janvier 2023'"
-                                [licencePlate]="'444 TBN'"></app-car-card-progress>
-
-                        </div>
-                        <div class="card draggable shadow-sm" id="cd1">
-                            <app-car-card-progress [vColor]="'black'" [vType]="1" [date]="'26 janvier 2023'"
-                                [licencePlate]="'444 TBN'"></app-car-card-progress>
+                    <div class="items border border-light" *ngIf="CarReparationProgress">
+                        <!-- <div class="card draggable shadow-sm" id="cd1" >
+                        <app-car-card-progress [vColor]="'black'" [vType]="1" [date]="'26 janvier 2023'"
+                            [licencePlate]="'444 TBN'"></app-car-card-progress>
+                            
+                        </div> -->
+                        <div class="card draggable shadow-sm" id="cd1" *ngFor="let cp of CarReparationProgress">
+                            <app-car-card-progress [vColor]="cp.idCar.colorCar" [vType]="cp.idCar.typeCar[0].reference"
+                                [date]="cp.date | date: 'YYYY/MM/dd'" [licencePlate]="cp.idCar.matricule">
+                            </app-car-card-progress>
 
                         </div>
 
@@ -41,10 +45,19 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title text-uppercase text-truncate py-2">Reparation terminée</h6>
-                    <div class="items border border-light">
-                        <div class="card draggable shadow-sm" id="cd11">
-                            <app-car-card-progress [vColor]="'black'" [vType]="1" [date]="'26 janvier 2023'"
-                                [licencePlate]="'444 TBN'"></app-car-card-progress>
+                    <div class="items border border-light" *ngIf="CarReparationDone">
+                        <!-- <div class="card draggable shadow-sm" id="cd11" >
+                            <app-car-card-progress [vColor]="'black'"
+                             [vType]="1"
+                              [date]="'26 janvier 2023'"
+                               [licencePlate]="'444 TBN'"
+                            ></app-car-card-progress>
+                        </div> -->
+                        <div class="card draggable shadow-sm" id="cd11" *ngFor="let crp of CarReparationDone">
+                            <app-car-card-progress [vColor]="crp.idCar.colorCar"
+                                [vType]="crp.idCar.typeCar[0].reference" [date]="crp.date | date: 'YYYY/MM/dd'"
+                                [licencePlate]="crp.idCar.matricule">
+                            </app-car-card-progress>
                         </div>
 
 
@@ -53,4 +66,3 @@
             </div>
         </div>
     </div>
-
