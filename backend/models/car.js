@@ -18,7 +18,8 @@ const carSchema = mongoose.Schema(
              },
              matricule: {
                  type: String,
-                 required:true
+                 required: true,
+                 unique : true,
              },
              proprietaire: {
                  type: String,
