@@ -76,7 +76,10 @@
                                 [vType]="crp.idCar.typeCar[0].reference" [date]="crp.date | date: 'YYYY/MM/dd'"
                                 [licencePlate]="crp.idCar.matricule">
                             </app-car-card-progress>
-                            <p>Proprietaire: <span class="fw-bold text-capitalize">{{crp.idUser.name}}</span> </p>
+                            <div class="d-flex justify-content-between" style="margin:0 5px 2px  5px;">
+                                <p>Proprietaire: <span class="fw-bold text-capitalize">{{crp.idUser.name}}</span> </p>
+                                <button mat-button color="custom-primary" (click)="goDepotDetails(crp._id)">Facture</button>
+                            </div>
                         </div>
 
 

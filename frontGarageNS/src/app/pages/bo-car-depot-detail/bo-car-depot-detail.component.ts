@@ -20,6 +20,8 @@ export class BoCarDepotDetailComponent implements OnInit {
   etatDepot!: any;
   deposerEtat!: any;
   reparationFini!: any;
+  checkoutDone!: any;
+  recoverCar!: any;
   dataSource!: MatTableDataSource<TypeReparation>;
   displayedColumns: string[] = ['Position', 'Suggestion'];
 
@@ -40,6 +42,8 @@ export class BoCarDepotDetailComponent implements OnInit {
     this.etatDepot = this.globalService.WAIT_VALIDATION;
     this.deposerEtat = this.globalService.WAIT_REPARATION;
     this.reparationFini = this.globalService.WAIT_CHECKOUT;
+    this.checkoutDone = this.globalService.CHECKOUT_DONE;
+    this.recoverCar = this.globalService.RECOVER_CAR;
   }
 
   getTotalCost() {
@@ -94,6 +98,30 @@ export class BoCarDepotDetailComponent implements OnInit {
     this.snackBarService.openSnackBar(
       message,
       'Okey', 'center', 'top', ['red-snackbar']);
+  }
+
+  checkout() {
+    this.globalService.DepotToFacturer(this.id).subscribe({
+      next: () => {
+        this.callSnackService('Paiement effectué');
+      },
+      error: (error: any) => {
+
+        this.callSnackService("Une erreur s'est produite!");
+      }
+    })
+  }
+
+  Recuperer() {
+    this.globalService.DepotFinir(this.id).subscribe({
+      next: () => {
+        this.callSnackService('Bon de sortie généré');
+      },
+      error: (error: any) => {
+
+        this.callSnackService("Une erreur s'est produite!");
+      }
+    })
   }
 
 

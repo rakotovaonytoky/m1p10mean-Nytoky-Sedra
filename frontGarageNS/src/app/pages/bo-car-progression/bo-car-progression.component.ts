@@ -1,5 +1,6 @@
 import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { Depot } from 'src/app/classes-v2/depot';
 import { GlobalService } from 'src/app/service/globalService/global.service';
 import { SnackbarService } from 'src/app/service/snackbar.service';
@@ -12,7 +13,8 @@ import { SnackbarService } from 'src/app/service/snackbar.service';
 export class BoCarProgressionComponent implements AfterViewInit {
 
   constructor(private globalService: GlobalService,
-    private snackBarService: SnackbarService) {
+    private snackBarService: SnackbarService,
+    private route: Router) {
 
     this.globalService.RefreshDepot.subscribe(data => {
       this.getCarWaitReparation();
@@ -163,6 +165,11 @@ export class BoCarProgressionComponent implements AfterViewInit {
       next: () => { this.callSnackService('La réparation est terminée'); },
       error: (error: any) => { this.callSnackService("Une erreur s'est produite!"); }
     })
+  }
+  goDepotDetails(id: any) {
+    this.route.navigate(
+      ['/Bo/depot-details/', id],
+    );
   }
 
 

@@ -13,7 +13,8 @@ let WAIT_VALIDATION = 1;
 let WAIT_REPARATION = 2;
 let REPARATION_PROGRESS = 3;
 let WAIT_CHECKOUT = 4;
-let RECOVER_CAR = 5
+let CHECKOUT_DONE = 5;
+let RECOVER_CAR = 6;
 @Injectable({
   providedIn: 'root'
 })
@@ -44,6 +45,13 @@ export class GlobalService {
     return WAIT_CHECKOUT;
   }
 
+  public get CHECKOUT_DONE() {
+    return CHECKOUT_DONE;
+  }
+
+  public get RECOVER_CAR() {
+    return RECOVER_CAR;
+  }
   getTypeCar(): Observable<TypeObject[]> {
     let token = this.authService.getToken();
     return this.httpClient.get<TypeObject[]>(API_URL + 'typecar');
