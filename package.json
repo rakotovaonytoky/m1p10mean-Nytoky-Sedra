@@ -1,4 +1,11 @@
 {
+  "name":"m1p10mean",
+  "version": "0.0.0",
+  "private":"true",
+  "scripts": {
+    "start":"cd backend && npm i && npm start",
+    "build":"cd frontGarageNS && ng build --configuration production"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3"
   }
