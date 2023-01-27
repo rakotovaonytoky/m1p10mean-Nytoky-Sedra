@@ -11,6 +11,7 @@ const etatCarRouter=require('./routes/etatCar');
  //connexion base de donnée
 app.use(express.json());
 app.use(cors());
+app.use(express.static("front-garage-ns"));
 Getconn.getConn();
 app.use('/api',userRouter);
 app.use('/api', carRouter);
