@@ -46,8 +46,8 @@ export class LoginSigninComponent implements OnInit {
 
 
   userLogin = new FormGroup({
-    email: new FormControl('', [Validators.required]),
-    motDePasse: new FormControl('', [Validators.required]),
+    email: new FormControl('rakotovaonytaka@gmail.com', [Validators.required]),
+    motDePasse: new FormControl('12345678', [Validators.required]),
   }
   );
 
