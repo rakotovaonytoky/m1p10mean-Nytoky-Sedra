@@ -15,6 +15,7 @@ import { BoCarProgressionComponent } from './pages/bo-car-progression/bo-car-pro
 import { BoCarDepotDetailComponent } from './pages/bo-car-depot-detail/bo-car-depot-detail.component';
 import { BoInvoiceDetailsComponent } from './pages/bo-invoice-details/bo-invoice-details.component';
 import { BoInvoiceComponent } from './pages/bo-invoice/bo-invoice.component';
+
 const routes: Routes = [
   { path: "", redirectTo: 'login', pathMatch: 'full' },
   { path: "login", component: LoginSigninComponent },
@@ -43,7 +44,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

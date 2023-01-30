@@ -7,6 +7,5 @@
     "build":"cd frontGarageNS && ng build --configuration production"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3"
   }
 }
